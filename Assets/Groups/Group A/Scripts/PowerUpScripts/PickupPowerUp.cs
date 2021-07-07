@@ -31,7 +31,7 @@ public class PickupPowerUp : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "floor")
+        if (collision.gameObject.tag == "Respawn")
         {
             Destroy(this.gameObject);
         }

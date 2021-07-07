@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4817542158783855741}
   - component: {fileID: 8808631201031986453}
   - component: {fileID: 2766573600853310701}
+  - component: {fileID: 3217503022753468956}
   m_Layer: 0
   m_Name: ShieldEffect
   m_TagString: Item
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a75e6a16cb093b045a9972237511a31c, type: 2}
+  - {fileID: 2100000, guid: 30772b54c64d9ec41ab464a690a1defc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,3 +124,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3217503022753468956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285368668807038843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009fb2ac4a07bbf459a72fd1e35c95d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 40

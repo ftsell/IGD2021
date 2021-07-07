@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Minifig: {fileID: 0}
   RespawnPointsSource: {fileID: 0}
+  AIStateMachine: {fileID: 0}
   characterId: 0
   isAi: 0
   maxForwardSpeed: 5
@@ -205,8 +206,8 @@ MonoBehaviour:
   jumpSpeed: 6.6
   gravity: 20
   pushSpeed: 20
-  drag: 0.95
-  pointLossRate: 0.75
+  drag: 10
+  pointLossRate: 0.9
   stepAudioClips:
   - {fileID: 8300000, guid: 39948ec2175e749819ecd850a1d0e5af, type: 3}
   - {fileID: 8300000, guid: 97adc7a6316eb42039437d84c81b25c9, type: 3}
@@ -218,6 +219,7 @@ MonoBehaviour:
   explodeAudioClip: {fileID: 8300000, guid: b9b607b06267c4394b07c19523c455f1, type: 3}
   inputEnabled: 1
   maxJumpsInAir: 0
+  state: 0
   playerPoints: 0
 --- !u!95 &6369660411640124950
 Animator:

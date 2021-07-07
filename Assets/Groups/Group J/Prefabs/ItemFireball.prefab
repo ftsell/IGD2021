@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7096854228173934909}
   - component: {fileID: 7096854228173934910}
   - component: {fileID: 7096854228173934911}
-  - component: {fileID: 7096854228173935296}
   - component: {fileID: 7096854228173935297}
+  - component: {fileID: 4315701101928946940}
   m_Layer: 0
   m_Name: ItemFireball
   m_TagString: Item
@@ -95,18 +95,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7096854228173935296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7096854228173935298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e472b7832f017488a0c198d450726d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &7096854228173935297
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,3 +111,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &4315701101928946940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096854228173935298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7170c2e177b4d8d4cad72ee46f788b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerUpType: 2
+  pickUpEffect: {fileID: 113646, guid: b947d8a162e5b9a4a8d59dea939836dc, type: 3}

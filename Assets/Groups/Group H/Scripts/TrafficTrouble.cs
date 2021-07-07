@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrafficTrouble : MiniGame
 {
-
+    public List<GameObject> players;
 
     private int[] firstPlace = null;
     private int[] secondPlace = null;
@@ -12,6 +12,18 @@ public class TrafficTrouble : MiniGame
     private int[] fourthPlace = null;
 
     private int[] playerHealth = new int[4];
+
+    void Start()
+    {
+        //Create list of your playersw
+
+        //Create List of corresponding player ids, in this case we only have two players
+        //The order of the ids and players should match
+        List<int> playerIds = new List<int> { 1, 2, 3, 4 };
+
+        //Call the provided method from the MiniGame class
+        InitializePlayers(players, playerIds);
+    }
 
     override public string getDisplayName()
     {

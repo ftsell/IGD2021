@@ -6,41 +6,32 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SharedAssets/Scenes/Example.unity
-    guid: dfb50ccc10f3e3143ad59a1e5d45d1b2
+    path: Assets/Groups/Group C - Interconnections/Scenes/Customization.unity
+    guid: e7ed4c15bea314d4cb0e28045669df6e
+  - enabled: 1
+    path: Assets/Groups/Group C - Interconnections/Scenes/CharacterSel.unity
+    guid: 90b088b20d0e14dbdb8a93f4781e6a93
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Groups/Group C - Interconnections/Scenes/MiniGameTesting.unity
+    guid: 3437c7b6e620f40398fa9e1d62a644b5
   - enabled: 1
     path: Assets/Groups/Group D - Boardgame/Scenes/Boardgame.unity
     guid: 1bb938055b9adb54385ae79050615d98
   - enabled: 1
     path: Assets/Groups/Group D - Boardgame/Scenes/EndScreen.unity
     guid: 9b196d0ca4b45764faea2d93531e61f1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Groups/Group D - Boardgame/Scenes/TestGameD.unity
     guid: 2fc11ace1390d5b498719bf9c51d2460
   - enabled: 1
     path: Assets/Groups/Group A/Scenes/WhatTheHill.unity
     guid: 0734bb9424008a54fa89a0a3a3a3ef63
   - enabled: 1
-    path: Assets/Groups/Group C - Interconnections/Scenes/CharacterSel.unity
-    guid: 90b088b20d0e14dbdb8a93f4781e6a93
-  - enabled: 1
-    path: Assets/Groups/Group C - Interconnections/Scenes/Customization.unity
-    guid: e7ed4c15bea314d4cb0e28045669df6e
-  - enabled: 1
-    path: Assets/Groups/Group C - Interconnections/Scenes/MiniGameTesting.unity
-    guid: 3437c7b6e620f40398fa9e1d62a644b5
-  - enabled: 1
     path: Assets/Groups/Group E/Scenes/KartRacingMinigame.unity
     guid: 105ffca1f5c70dd4795867f4c71a3b16
   - enabled: 1
     path: Assets/Groups/Group F/Scenes/GriddyBattle.unity
-    guid: 38c089534ed2efc40b8e500365057cd7
-  - enabled: 1
-    path: Assets/Groups/Group G/Scenes/main.unity
-    guid: 58b149f60d25d6f4084f73a4f134fae4
+    guid: bf369e0f71974b14b9b87f9eabaed034
   - enabled: 1
     path: Assets/Groups/Group G/Scenes/RapidFire.unity
     guid: 32d16b247c2fa1a4c89ecb571bad84d8
@@ -48,7 +39,7 @@ EditorBuildSettings:
     path: Assets/Groups/Group H/Scenes/TrafficTrouble.unity
     guid: 7e32eaab81493bc75b5df750bec62992
   - enabled: 1
-    path: Assets/Groups/Group I/Scenes/platti.unity
+    path: Assets/Groups/Group I/Scenes/RunBrickRun.unity
     guid: b7c1160c461014b63ae5b3f80d52fb95
   - enabled: 1
     path: Assets/Groups/Group J/Scenes/Minigame_Group_J.unity
@@ -60,14 +51,11 @@ EditorBuildSettings:
     path: Assets/Groups/Group K/CrossTheCanyons/Scenes/CrossTheCanyons.unity
     guid: a31521581d2d46145a3eb79f728cc366
   - enabled: 1
-    path: Assets/Groups/Group K/Marlons Kram/K_Meteorfall.unity
+    path: Assets/Groups/Group K/Scenes/KMeteorfall.unity
     guid: b22d6f00ccb731e40bd9441b62488ca7
   - enabled: 1
-    path: Assets/Groups/Group P/Scenes/KeypressHandling.unity
-    guid: bbc0c6a099dae1a4da604fd91b437bef
-  - enabled: 1
-    path: Assets/Groups/Group P/Scenes/2d.unity
-    guid: 5a141690f9bdba441bd8d0ed45a0aec7
+    path: Assets/Groups/Group P/Scenes/RhythmGameScene.unity
+    guid: a1572d832ade7ce4cb610244ce929953
   - enabled: 1
     path: Assets/Groups/Group R/Scenes/SceneR.unity
     guid: a9b1d26acb0d9eb409ceab938bdf0340

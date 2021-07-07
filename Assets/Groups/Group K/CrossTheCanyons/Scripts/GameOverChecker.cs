@@ -13,7 +13,7 @@ public class GameOverChecker : MonoBehaviour
     public LevelManager levelManager;
     void Update()
     {
-        if (!minifigure1_isDead && minifigure1.transform.position.y < -1.0f)
+        if (!minifigure1_isDead && minifigure1.transform.position.y < 1.5f)
         {
             minifigure1.GetComponent<MinifigControllerModified>().ClearMoves();
             minifigure1_isDead = true;
@@ -21,7 +21,7 @@ public class GameOverChecker : MonoBehaviour
             LeftPlayerDead();
         }
 
-        if (!minifigure2_isDead && minifigure2.transform.position.y < -1.0f)
+        if (!minifigure2_isDead && minifigure2.transform.position.y < 1.5f)
         {
             minifigure2.GetComponent<MinifigControllerModified>().ClearMoves();
             minifigure2_isDead = true;

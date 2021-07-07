@@ -7,8 +7,6 @@ public class PowerupShield : PowerUp
     private static int DURATION = 15;
     public override IEnumerator UsePowerup(GameObject player)
     {
-        Debug.Log("Name: " + Name);        
-
         CarController controller = player.GetComponent<CarController>();
         PlayerStats ps = player.GetComponent<PlayerStats>();
         bool usedBrick = false;

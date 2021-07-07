@@ -30,21 +30,16 @@ namespace GroupP {
 
         private int counter;
 
-        private bool hasStarted;
-
         // Probability that there is at least one note on the next beat
         float pNext = 0.75f;
 
         public Queue<NoteEntry> noteQueue;
 
-        public void setHasStarted() {
-            hasStarted = true;
-        }
         void Start()
         {
             GameObject theSong = GameManager.instance.getSong();
             tempo = theSong.GetComponent<Song>().beatsPerMinute;
-            songOffset = theSong.GetComponent<Song>().offset;
+            songOffset = theSong.GetComponent<Song>().offsetInSeconds;
             noteQueue = new Queue<NoteEntry>();
             
 
@@ -85,9 +80,6 @@ namespace GroupP {
         // Update is called once per frame
         void Update()
         {
-            if(hasStarted) {
-               //transform.localPosition -=  new Vector3(Time.deltaTime*tempo, 0f, 0f);
-            }
             float now = Time.time;
         
             if (now - lastBeat > deltaBeatS || now == 0) {
@@ -121,7 +113,7 @@ namespace GroupP {
             
             obj.GetComponent<Note>().key = key;
             
-            obj.transform.localPosition = new Vector3(songOffset + position * 60f, 0f, 0f);
+            obj.transform.localPosition = new Vector3((tempo * songOffset) + position * 60f, 0f, 0f);
             obj.GetComponent<Note>().tempo = tempo;
 
             return obj;

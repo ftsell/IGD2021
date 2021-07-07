@@ -90,12 +90,7 @@ public class OurMinifigController : MonoBehaviour
     /// The GameManagerR sets this to true if the game is over
     /// </summary>
     public bool gameOver = false;
-    
-    /// <summary>
-    /// Whether the player is hitting right now
-    /// </summary>
-    public bool isHitting = false;
-    
+
     /// <summary>
     /// The type of item that the player has at the moment. e.g. batarang
     /// </summary>
@@ -132,22 +127,42 @@ public class OurMinifigController : MonoBehaviour
     /// </summary>
     public bool hasItem = false;
 
+    /// <summary>
+    /// Reference to the iceberg that moves with the player and is set to visible if the player gets frozen
+    /// </summary>
+    public GameObject iceBerg;
+
+    private bool frozen = false;
+
     public Item item = null;
 
 
     [Header("Audio")]
 
     public List<AudioClip> stepAudioClips = new List<AudioClip>();
+   
+
     public AudioClip jumpAudioClip;
     public AudioClip doubleJumpAudioClip;
     public AudioClip landAudioClip;
     public AudioClip explodeAudioClip;
+    public AudioClip throwPunchAudioClip;
+    public AudioClip receivePunchAudioClip;
+    
+    public AudioClip LaserAudio1;
+    public AudioClip LaserAudio2;
+    public AudioClip deadAudioClip;
+    public AudioClip applausAudioClip;
+    public AudioClip smallGunAudioClip;
+    public AudioClip bigGunAudioClip;
+    public AudioClip batAudioClip;
+    public AudioClip boomerangAudioClip;
 
     [Header("Controls")]
     [SerializeField]
     bool inputEnabled = true;
     [SerializeField, Range(0, 10)]
-    int maxJumpsInAir = 1;
+    int maxJumpsInAir = 5;
 
     public enum SpecialAnimation
     {
@@ -244,6 +259,7 @@ public class OurMinifigController : MonoBehaviour
     int punchHash = Animator.StringToHash("Punch");
     int swordHash = Animator.StringToHash("Sword");
     int throwHash = Animator.StringToHash("Throw");
+    int shootHash = Animator.StringToHash("Shoot");
 
     Action<bool> onSpecialComplete;
 
@@ -269,6 +285,11 @@ public class OurMinifigController : MonoBehaviour
     {
         string controlScheme = GetComponent<PlayerInput>().defaultControlScheme;
         GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme, Keyboard.current);
+        audioSource.PlayDelayed(0.5f);
+        
+
+
+
     }
 
     void Update()
@@ -833,8 +854,9 @@ public class OurMinifigController : MonoBehaviour
     {
         var completeFunc = currentTurnTarget.onComplete;
         currentTurnTarget = null;
-
+       
         completeFunc?.Invoke();
+        Debug.Log("Gewonnen");
 
         UpdateState();
     }
@@ -925,6 +947,7 @@ public class OurMinifigController : MonoBehaviour
     private void OnSouthPress()
     {
         Attack();
+       
     }
 
     public void Attack()
@@ -934,19 +957,61 @@ public class OurMinifigController : MonoBehaviour
             return;
         }
         if (!hasItem)
+        {
             animator.SetTrigger(punchHash);
+            castARay(strength, hitRange);
+            audioSource.PlayOneShot(throwPunchAudioClip,0.1f);
+           
+        }
         else
         {
-            if (itemType == "batarang")
+            if (itemType == "batarang" || itemType == "legosteinl")
+            {
                 animator.SetTrigger(throwHash);
+                audioSource.PlayOneShot(boomerangAudioClip);
+            }
             else if (itemType == "sword")
+            {
                 animator.SetTrigger(swordHash);
-            else if (itemType== "gun"){
+                if (UnityEngine.Random.Range(0, 2) > 0)
+                    audioSource.PlayOneShot(LaserAudio1);
+                else
+                    audioSource.PlayOneShot(LaserAudio2);
+            }
+            else if (itemType == "knive")
+            {
                 animator.SetTrigger(swordHash);
-                castARay(item.strength,1000.0f);
+            }
+            else if (itemType == "baseballbatl")
+            {
+                animator.SetTrigger(swordHash);
+                audioSource.PlayOneShot(batAudioClip);
+                Invoke("usedItem", 0.5f);
+            }
+            else if (itemType == "ice_wand" || itemType == "hammerl")
+            {
+                animator.SetTrigger(swordHash);
+                Invoke("usedItem", 0.5f);
+            }
+            else if (itemType == "gun")
+            {
+                animator.SetTrigger(shootHash);
+                audioSource.PlayOneShot(smallGunAudioClip);
+                Invoke("usedItem", 0.5f);
+                Invoke("shoot", 0.5f);
+            }
+            else if (itemType == "gunl"){
+                animator.SetTrigger(shootHash);
+                audioSource.PlayOneShot(bigGunAudioClip);
+                Invoke("usedItem", 0.5f);
+                Invoke("shoot", 0.5f);
             }
         }
-        castARay(strength,hitRange);
+    }
+
+    private void shoot()
+    {
+        castARay(item.strength, 1000.0f);
     }
 
     private void castARay(int damageToInduce, float rayDistance){
@@ -966,6 +1031,9 @@ public class OurMinifigController : MonoBehaviour
                 hit_direction.Normalize();
                 float dmg_scale = (hit_player.damage + 10) * 0.01f;
                 hit_player._knockback += hit_direction * dmg_scale;
+                audioSource.clip = receivePunchAudioClip;
+                audioSource.PlayDelayed(0.1f);
+                
             }
         }
     }
@@ -1008,6 +1076,11 @@ public class OurMinifigController : MonoBehaviour
                 hit_direction.Normalize();
                 float dmg_scale = (damage + 10) * 0.01f;
                 _knockback += hit_direction * dmg_scale;
+                //handle ice_wand
+                if (collidingItem.type == "ice_wand")
+                {
+                    freeze();
+                }
                 return; //getting hit by item handling?
             }
             if (!collidingItem.isPickedUp && hasItem==false)
@@ -1054,7 +1127,6 @@ public class OurMinifigController : MonoBehaviour
     {
         if (!hasItem)
             return;
-        isHitting = hitting;
         if (hitting)
         {
             item.isActive = true;
@@ -1082,5 +1154,28 @@ public class OurMinifigController : MonoBehaviour
         if(transform.position.z > 8.4) return 2;
         if(transform.position.y > 3) return 3;
         return 1;
+    }
+
+    private void freeze()
+    {
+        if (frozen)
+        {
+            return;
+        }
+        frozen = true;
+        MeshRenderer iceBergMeshRenderer = iceBerg.GetComponent<MeshRenderer>();
+        iceBergMeshRenderer.enabled = true;
+        inputEnabled = false;
+        animator.speed = 0;
+        Invoke("unfreeze", 1);
+    }
+
+    private void unfreeze()
+    {
+        inputEnabled = true;
+        animator.speed = 1;
+        MeshRenderer iceBergMeshRenderer = iceBerg.GetComponent<MeshRenderer>();
+        iceBergMeshRenderer.enabled = false;
+        frozen = false;
     }
 }

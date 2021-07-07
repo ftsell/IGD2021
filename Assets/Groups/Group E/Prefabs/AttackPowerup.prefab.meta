@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Groups/Group E/Prefabs/AttackPowerup.prefab.meta
 guid: dc2b33f518b9f1f4e8179bbe16c7e954
+=======
+guid: 4bd0a0527afa77448aa5cbb261a83f66
+>>>>>>> 4d4afe383073a6d9516ae6681d7ad591a3bec097:Assets/Groups/Group D - Boardgame/Prefabs/SmallTrap.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

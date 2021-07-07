@@ -37,14 +37,16 @@ public class GameManagerK : MonoBehaviour
         {
             leftCrane.MoveOutOfScene(true);
             minifigure1.MoveTo(leftGoal, moveDelay: 2.0f, speedMultiplier: 0.2f,
-                onComplete: () => {minifigure1.PlaySpecialAnimation(MinifigControllerModified.SpecialAnimation.Dance, 
+                onComplete: () => {levelManager.MoveGoalDownwards(left: true);
+                    minifigure1.PlaySpecialAnimation(MinifigControllerModified.SpecialAnimation.Dance, 
                     onSpecialComplete: x => {StartNextLevel(leftPlayer: true);});});
         }
         if (!gameOverChecker.IsRightPlayerDead())
         {
             rightCrane.MoveOutOfScene(false);
             minifigure2.MoveTo(rightGoal, moveDelay: 2.0f, speedMultiplier: 0.2f,
-                onComplete: () => {minifigure2.PlaySpecialAnimation(MinifigControllerModified.SpecialAnimation.Dance, 
+                onComplete: () => {levelManager.MoveGoalDownwards(left: false);
+                    minifigure2.PlaySpecialAnimation(MinifigControllerModified.SpecialAnimation.Dance, 
                     onSpecialComplete: x => {StartNextLevel(leftPlayer: false);});});
         }
     }

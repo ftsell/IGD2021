@@ -8,6 +8,7 @@ public class PauseManager : MonoBehaviour
     public GameObject canvasPrefab;
     private Canvas _canvas;
     private bool pauseIsOpen=false;
+    private bool muted = false;
 
 /////////////////////////////////////////////////////////////
     public static PauseManager Instance;
@@ -67,6 +68,16 @@ public class PauseManager : MonoBehaviour
     else if(pauseIsOpen==true){
       ClosePauseMenu();
     }
+    }
+    if(Input.GetKeyDown(KeyCode.S) && pauseIsOpen){
+      if(muted == false){
+        muted = true;
+        AudioListener.pause = true;// Turns sound off.
+      }
+      else{
+        muted = false;
+        AudioListener.pause = false;// Turns sound on.
+      }
     }
   }
 }

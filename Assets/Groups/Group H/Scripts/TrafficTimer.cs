@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TrafficTimer : MonoBehaviour
 {
     public float currentTime = 0f;
-    public float startingTime = 45f;
+    public float startingTime = 99f;
     public Text countdownText;
 
     public TrafficTrouble gameManager;
@@ -30,7 +30,7 @@ public class TrafficTimer : MonoBehaviour
                 countdownText.color = Color.red;
             }
         }
-        if (currentTime <= 0)
+        else if (currentTime <= 0)
         {
             //Include method to end the game when timer hits 0
             gameManager.TimeIsOver();

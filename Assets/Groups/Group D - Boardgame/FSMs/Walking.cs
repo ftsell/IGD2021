@@ -27,7 +27,7 @@ public class Walking : FSM
             // attempted workaround: 
             time = 0.0f;
             activeController.ClearMoves(); // remove the previous move command
-            activeController.MoveToTile(target); // try againg
+            activeController.TeleportToTile(target); // teleport to target position
 
 
         }

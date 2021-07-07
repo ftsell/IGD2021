@@ -17,7 +17,7 @@ namespace Groups.Group_S
         private void OnCollisionEnter(Collision other)
         {
             // Object is only grabbable when it's a part and not parented by anything, especially not a player
-            if (other.gameObject.CompareTag("KartPart") && (other.transform.parent == null || !other.transform.parent.CompareTag("Player") ))
+            if (other.gameObject.CompareTag("KartPart") && (other.transform.parent.name == "KartParts" || other.transform.parent == null || !other.transform.parent.CompareTag("Player") ))
             {
                 _grabbable = other.gameObject;
             }

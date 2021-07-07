@@ -57,7 +57,7 @@ public class SpawnPowerUps : MonoBehaviour
 
     public GameObject SpawnPlayerEquipment(string powerUpIdentifier, MinifigControllerWTH player)
     {
-        string path = @"Minifig Character WTH/jointScaleOffset_grp/Joint_grp/detachSpine/spine01/spine02/spine03/spine04/spine05/spine06/shoulder_R/armUp_R/arm_R/wristTwist_R/wrist_R/hand_R/BatSnap";
+        string path = @"Minifig Character/jointScaleOffset_grp/Joint_grp/detachSpine/spine01/spine02/spine03/spine04/spine05/spine06/shoulder_R/armUp_R/arm_R/wristTwist_R/wrist_R/hand_R/BatSnap";
         //Transform batLock = player.transform.Find(path);
         GameObject powerUpPrefab = spawnablePowerUps.Find(prefab => prefab.name == powerUpIdentifier);
         GameObject bat = Instantiate(powerUpPrefab);

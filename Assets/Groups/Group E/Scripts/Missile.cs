@@ -8,39 +8,42 @@ public class Missile : MonoBehaviour
     private Rigidbody rb;
     private NavMeshAgent navMeshAgent;
     private Transform toFollow = null;
+    private GameObject missileOwner;
 
     public float missileSpeed = 150.0f;
     public GameObject explosionPrefab;
 
 
-    public void Init()
+    public void Init(GameObject missileOwner)
     {
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        this.missileOwner = missileOwner;
     }
 
     private void FixedUpdate()
-    {
-        
+    { 
         {
             if(toFollow != null)
             {
                 navMeshAgent.SetDestination(toFollow.position);
-            }
-            //Vector3 direction = toFollow.position - transform.position;
-            //rb.velocity = direction.normalized * missileSpeed;
-            
+            }       
         }
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
             PlayerStats ps = collision.gameObject.GetComponent<PlayerStats>();
             Rigidbody playerRb = collision.gameObject.GetComponent<Rigidbody>();
             CarController playerController = collision.gameObject.GetComponent<CarController>();
+            
+            if(collision.gameObject.TryGetComponent(out NavAgentScript_E agent) && (!ps.hasShield))
+            {
+                agent.DisableAgentTemp();
+            }
 
             if(ps.hasShield)
             {
@@ -48,12 +51,18 @@ public class Missile : MonoBehaviour
                 ps.StopShield();
             } else
             {
-                playerRb.AddExplosionForce(1200f, gameObject.transform.position, 3.0f);
-                playerController.StopCar();
+                if (toFollow != null && !collision.gameObject.Equals(missileOwner) || toFollow == null)
+                {
+                    playerRb.AddExplosionForce(25000f, gameObject.transform.position, 8.0f);
+                    playerController.StopCar();
+                }
             }
 
-            AnimateExplosion(gameObject.transform);
-            Destroy();
+            if (toFollow != null && !collision.gameObject.Equals(missileOwner) || toFollow == null)
+            {
+                AnimateExplosion(gameObject.transform);
+                Destroy();
+            }
         } 
     }
 

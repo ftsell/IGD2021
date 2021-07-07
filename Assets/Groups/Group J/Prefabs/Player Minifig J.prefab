@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &6592332621969300599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666485390700112213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4784a55a1fd31b549b19d647df9b12b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
+  firePoint: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &6785397718972689670
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,8 +28,8 @@ GameObject:
   - component: {fileID: 1006981346947650990}
   - component: {fileID: 4204894419759497035}
   - component: {fileID: 6226401840187301817}
-  - component: {fileID: 3014733515802919082}
   - component: {fileID: 3193311293996516437}
+  - component: {fileID: 3014733515802919082}
   - component: {fileID: 929011022277811195}
   - component: {fileID: -7487976069247552195}
   - component: {fileID: 3776569923070715388}
@@ -221,6 +236,20 @@ MonoBehaviour:
   m_DefaultActionMap: Ingame
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!136 &3193311293996516437
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785397718972689670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.6399813
+  m_Height: 4.596112
+  m_Direction: 1
+  m_Center: {x: 0.15476762, y: 2, z: 0.064280175}
 --- !u!136 &3014733515802919082
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -235,20 +264,6 @@ CapsuleCollider:
   m_Height: 4.2928863
   m_Direction: 1
   m_Center: {x: 0.13946909, y: 2, z: 0.117307}
---- !u!136 &3193311293996516437
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6785397718972689670}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  m_Radius: 1.6399813
-  m_Height: 4.596112
-  m_Direction: 1
-  m_Center: {x: 0.15476762, y: 2, z: 0.064280175}
 --- !u!114 &929011022277811195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +316,9 @@ MonoBehaviour:
   lookRadius: 5
   players: []
   obstacle: {fileID: 0}
+  ownTeam: 0
+  wanderRadius: 15
+  wanderTimer: 2
 --- !u!195 &1806776424461721919
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -330,10 +348,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2978740457091137356}
     m_Modifications:
+    - target: {fileID: 321846012832530514, guid: 4991669ebb88a0f45b4f00ab705aea7d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 321846012832530514, guid: 4991669ebb88a0f45b4f00ab705aea7d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 321846012832530514, guid: 4991669ebb88a0f45b4f00ab705aea7d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.05
+      objectReference: {fileID: 0}
     - target: {fileID: 3396648646272746391, guid: 4991669ebb88a0f45b4f00ab705aea7d,
         type: 3}
       propertyPath: m_Name
       value: Minifig Character J
+      objectReference: {fileID: 0}
+    - target: {fileID: 5147594744140374146, guid: 4991669ebb88a0f45b4f00ab705aea7d,
+        type: 3}
+      propertyPath: m_Name
+      value: projectile
       objectReference: {fileID: 0}
     - target: {fileID: 6367911877577183709, guid: 4991669ebb88a0f45b4f00ab705aea7d,
         type: 3}

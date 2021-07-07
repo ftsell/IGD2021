@@ -38,19 +38,19 @@ public class PlayerController : MonoBehaviour
     {
         string controlScheme = GetComponent<PlayerInput>().defaultControlScheme;
         GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme, Keyboard.current);
-
-    }
-
-    private void Awake()
-    {
-        AudioSource = GetComponent<AudioSource>();
-
         State = AIState.Roaming;
         if (AI)
         {
             StartCoroutine(Roaming());
             Target = this.gameObject;
         }
+    }
+
+    private void Awake()
+    {
+        AudioSource = GetComponent<AudioSource>();
+
+        
     }
     private void Update()
     {

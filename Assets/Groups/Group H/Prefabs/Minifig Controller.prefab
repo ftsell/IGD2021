@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Minifig: {fileID: 2747616020551863343}
+  disableControls: 0
+  controllerTimer: 99
   maxForwardSpeed: 5
   maxBackwardSpeed: 4
   acceleration: 13.2
@@ -89,6 +91,7 @@ MonoBehaviour:
   maxJumpsInAir: 1
   grabber: {fileID: -6220251526473426468}
   kicker: {fileID: 3228778136329532822}
+  state: 0
 --- !u!143 &9059058296123757962
 CharacterController:
   m_ObjectHideFlags: 0
@@ -277,6 +280,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explodeAudioClip: {fileID: 8300000, guid: b9b607b06267c4394b07c19523c455f1, type: 3}
+  playerTurnsIntoGhost: {fileID: 8300000, guid: 0a3853532f2d1443a925f2a9fa0cc83e,
+    type: 3}
   collider: {fileID: 3279519717318485571}
   minifigCharacter: {fileID: 2747616020551863343}
   health: {fileID: 6776377133075310417}
@@ -323,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  maxHealth: 3
   numberOfHearts: 3
   hearts:
   - {fileID: 0}
@@ -332,6 +338,7 @@ MonoBehaviour:
   emptyHeart: {fileID: 21300000, guid: 55e00bb1db3a7be448911f5b270a5e15, type: 3}
   ownID: 0
   gameManager: {fileID: 0}
+  increasingHealth: {fileID: 8300000, guid: e37fd12f20b6a40659156e6003b7a4a1, type: 3}
 --- !u!114 &6943488984303928087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,8 +352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 5560795514181553838}
-  viewingDistance: 5
-  dangerViewingDistance: 15
+  ownID: 0
+  playerViewingDistance: 1
 --- !u!1001 &649133815285714872
 PrefabInstance:
   m_ObjectHideFlags: 0

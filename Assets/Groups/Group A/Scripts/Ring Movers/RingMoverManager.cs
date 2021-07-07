@@ -19,7 +19,7 @@ public class RingMoverManager : MonoBehaviour
     void Start()
     {
         cooldown = 5f;
-        speed = 0.5f;
+        speed = 0.2f;
         dur = 5f;
         bl_active = true;
         br_active = true;

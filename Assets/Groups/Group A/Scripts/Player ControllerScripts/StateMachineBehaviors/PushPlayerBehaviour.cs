@@ -48,7 +48,16 @@ public class PushPlayerBehaviour : StateMachineBehaviour
                 animator.SetBool("PlayerInSight", false);
             } else
             {
-                playerController.MoveTo(currentPath.corners[1]);
+                if (Vector3.Distance(player.transform.position, currentPath.corners[1]) > 0.5f)
+                {
+                    playerController.MoveTo(currentPath.corners[1]);
+                }
+                else if (currentPath.corners.Length > 2)
+                {
+                    Vector3 jumpGoal = currentPath.corners[2];
+                    playerController.MoveTo(jumpGoal);
+                    playerController.AddForce(new Vector3(0, playerController.jumpSpeed, 0));
+                }
             }
         }
 

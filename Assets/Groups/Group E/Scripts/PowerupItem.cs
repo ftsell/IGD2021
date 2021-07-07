@@ -32,7 +32,25 @@ public class PowerupItem : MonoBehaviour
         {
             ps.power = powerup;
             ps.hasPowerup = true;
-            ps.textPowerup.text = "Powerup: \n" + powerup.Name;
+           //ps.textPowerup.text = "Powerup: \n" + powerup.Name;
+
+            switch (powerup.Name)
+            {
+                case "Speed":
+                    ps.imagePowerupSpeed.enabled = true;
+                    break;
+                case "Attack":
+                    ps.imagePowerupAttack.enabled = true;
+                    break;
+                case "ReverseSteer":
+                    ps.imagePowerupReverse.enabled = true;
+                    break;
+                case "Shield":
+                    ps.imagePowerupShield.enabled = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
         GetComponent<Collider>().enabled = false;

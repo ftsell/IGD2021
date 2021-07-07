@@ -116,13 +116,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262752908}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.12565188, y: -0.13334045, z: -0.098655075, w: 0.97810996}
+  m_LocalPosition: {x: -7.16, y: 0.5, z: -5}
+  m_LocalScale: {x: -8.48, y: 1, z: -6.24}
   m_Children: []
   m_Father: {fileID: 1451800805}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -15.79, y: -14.2, z: -9.54}
 --- !u!1 &1321111179
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321111179}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1, y: 0, z: -0.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 229162745}
@@ -174,6 +174,7 @@ MonoBehaviour:
   Bullet: {fileID: 1602019724020085795, guid: ec2301c4a43cf1847938118d1ea1440f, type: 3}
   FireRate: 3
   TimeUntilLvlUp: 60
+  Level: 0
 --- !u!82 &1321111181
 AudioSource:
   m_ObjectHideFlags: 0
@@ -296,14 +297,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451800804}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.053872228, y: -0.0019383766, z: -0.026254177, w: 0.9982008}
+  m_LocalPosition: {x: 0.2, y: -10.95, z: -0.9}
+  m_LocalScale: {x: 1, y: 1, z: -24.25}
   m_Children:
   - {fileID: 1262752909}
   m_Father: {fileID: 1224320576}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -6.18, y: -0.06, z: -3.01}
 --- !u!114 &1451800807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,8 +321,9 @@ MonoBehaviour:
   - transform: {fileID: 1262752909}
     rotation: {x: 0, y: 0, z: 0, w: 0}
   Bullet: {fileID: 7107171120353065564, guid: 645be070c0157df41a5d95edf8258af3, type: 3}
-  FireRate: 3
+  FireRate: 30
   TimeUntilLvlUp: 60
+  Level: 0
 --- !u!82 &1451800806
 AudioSource:
   m_ObjectHideFlags: 0
@@ -446,7 +448,7 @@ Transform:
   m_GameObject: {fileID: 1999643254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.55}
   m_Children:
   - {fileID: 946534693}
   m_Father: {fileID: 1224320576}
@@ -470,6 +472,7 @@ MonoBehaviour:
   Bullet: {fileID: 7107171120353065564, guid: d47aa9f74e901bb4a82fb000bc8d1012, type: 3}
   FireRate: 3
   TimeUntilLvlUp: 60
+  Level: 0
 --- !u!82 &1999643256
 AudioSource:
   m_ObjectHideFlags: 0
@@ -824,6 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7f71d1b2dc32548b9384abf84ddc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AI: 1
   Speed: 25
   Tilt: 1
   Boundary:
@@ -835,16 +839,32 @@ MonoBehaviour:
   - {fileID: 1321111182}
   - {fileID: 1999643257}
   - {fileID: 1451800807}
-  SlowRate: 8
-  SlowDuration: 5
+  SlowRate: 10
+  SlowDuration: 4
   SlowMultiplier: 0.1
   SlowCooldownText: {fileID: 0}
   WaveHazards:
-  - {fileID: 4656878949886663458, guid: 9b9780eedcbab684e88813b608e59a77, type: 3}
   - {fileID: 4558673099514210304, guid: 3f5e23bc0369ebb47945861a10cb1415, type: 3}
+  - {fileID: 4558673099514210304, guid: 3f5e23bc0369ebb47945861a10cb1415, type: 3}
+  - {fileID: 7479661471062324380, guid: 0b51eb0d833bc13418b3e176f0ee2720, type: 3}
+  - {fileID: 840265468919361823, guid: 285b0682d30e7a948895adb62e1e620f, type: 3}
+  - {fileID: 3148916495713525860, guid: 889dba4225e6a3f4387a95204e860160, type: 3}
   - {fileID: 7107171120353065564, guid: d47aa9f74e901bb4a82fb000bc8d1012, type: 3}
+  - {fileID: 7107171120353065564, guid: d47aa9f74e901bb4a82fb000bc8d1012, type: 3}
+  - {fileID: 2719599585128989925, guid: 9801725a4c0a97d49ad96ae35b642737, type: 3}
+  - {fileID: 2848008361015474564, guid: 12db28716f6010541a3aac039c81fdd7, type: 3}
+  - {fileID: 6494924134199559374, guid: 0d5ce84bc14b7b841a978f2ee5eddb0f, type: 3}
+  - {fileID: 4656878949886663458, guid: 9b9780eedcbab684e88813b608e59a77, type: 3}
+  - {fileID: 4656878949886663458, guid: 9b9780eedcbab684e88813b608e59a77, type: 3}
+  - {fileID: 1566888129405413507, guid: 413f3f49c7cba5043b87105e0b0d6a46, type: 3}
+  - {fileID: 4698065250868047217, guid: 828a36a9a8b198e4a82c9231d5ff4c78, type: 3}
+  - {fileID: 6325730153020512494, guid: 49bab44e92aed8e4b9d190b4c028dbf6, type: 3}
   - {fileID: 7638872702432176425, guid: 4b96833a943eaaf4596370b850a82ee6, type: 3}
-  WaveSpawnValues: {x: 43, y: 0, z: 40}
+  - {fileID: 7638872702432176425, guid: 4b96833a943eaaf4596370b850a82ee6, type: 3}
+  - {fileID: 7638872702432176425, guid: 4b96833a943eaaf4596370b850a82ee6, type: 3}
+  - {fileID: 7638872702432176425, guid: 4b96833a943eaaf4596370b850a82ee6, type: 3}
+  - {fileID: 7638872702432176425, guid: 4b96833a943eaaf4596370b850a82ee6, type: 3}
+  WaveSpawnValues: {x: 43, y: 0, z: 45}
   HazardCount: 6
   WaveRate: 8
   WaveCooldownText: {fileID: 0}

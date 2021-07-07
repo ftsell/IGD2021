@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-class GameManagerJ : MiniGame
+ public class GameManagerJ : MiniGame
 {
     // Start is called before the first frame update
     public int deathCount1 = 0;
@@ -19,16 +19,16 @@ class GameManagerJ : MiniGame
     public GameObject thirdPlayer;
     public GameObject fourthPlayer;
     public bool gameFinished = false;
-    public bool gameFinishCalled = false;
 
     public int team1LavaDeath = 0;
     public int team2LavaDeath = 0;
+    bool isRunning = true;
 
     void Start()
     {
-
+        
         var playerInputs = new List<PlayerInput> { myPlayer.GetComponent<PlayerInput>(), secondPlayer.GetComponent<PlayerInput>(), thirdPlayer.GetComponent<PlayerInput>(), fourthPlayer.GetComponent<PlayerInput>() };
-
+   
         InputManager.Instance.AssignPlayerInput(playerInputs);
 
         StartCoroutine(MotorChange(arm, counter));
@@ -46,7 +46,7 @@ class GameManagerJ : MiniGame
 
     public void UpdateDeath(bool isTeam1)
     {
-        if (isTeam1)
+        if (isTeam1) 
         {
             deathCount1++;
             team1DeathCount.text = "Hits: " + deathCount1;
@@ -55,24 +55,23 @@ class GameManagerJ : MiniGame
         {
             deathCount2++;
             team2DeathCount.text = "Hits: " + deathCount2;
-        }
+        }       
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         if (gameFinished == true)
         {
+            if (!isRunning) return;
+            isRunning = false;
             Time.timeScale = 0;
+            Debug.Log("Game finished");
             //Create array of positions with player ids, this also works in case there are multiple players in one position
 
-            if (!gameFinishCalled)
-            {
-                gameFinishCalled = true;
-                //Note this is still work in progress, but ideally you will use it like this
-                MiniGameFinished(firstPlace: GetWinningMembers().ToArray(), secondPlace: GetLoosingMembers().ToArray(), thirdPlace: null, fourthPlace: null);
-            }
+            //Note this is still work in progress, but ideally you will use it like this
+            MiniGameFinished(GetWinningMembers().ToArray(), GetLoosingMembers().ToArray(), new int[] { 0}, new int[] {1});
         }
     }
 
@@ -86,30 +85,30 @@ class GameManagerJ : MiniGame
 
         if (team1LavaDeath == 2 && team2LavaDeath == 2)
         {
-            ranking.Add(myPlayer.GetInstanceID());
-            ranking.Add(secondPlayer.GetInstanceID());
-            ranking.Add(thirdPlayer.GetInstanceID());
-            ranking.Add(fourthPlayer.GetInstanceID());
+            ranking.Add(0);
+            ranking.Add(1);
+            ranking.Add(2);
+            ranking.Add(3);
         }
         else if (team1LavaDeath == 2)
         {
-            ranking.Add(myPlayer.GetInstanceID());
-            ranking.Add(secondPlayer.GetInstanceID());
+            ranking.Add(0);
+            ranking.Add(1);
         }
         else if (team2LavaDeath == 2)
         {
-            ranking.Add(thirdPlayer.GetInstanceID());
-            ranking.Add(fourthPlayer.GetInstanceID());
+            ranking.Add(2);
+            ranking.Add(3);
         }
         else if (deathCount1 < deathCount2)
         {
-            ranking.Add(myPlayer.GetInstanceID());
-            ranking.Add(secondPlayer.GetInstanceID());
+            ranking.Add(0);
+            ranking.Add(1);
         }
         else
         {
-            ranking.Add(thirdPlayer.GetInstanceID());
-            ranking.Add(fourthPlayer.GetInstanceID());
+            ranking.Add(2);
+            ranking.Add(3);
         }
 
         return ranking;
@@ -125,23 +124,23 @@ class GameManagerJ : MiniGame
         else
        if (team1LavaDeath == 2)
         {
-            ranking.Add(thirdPlayer.GetInstanceID());
-            ranking.Add(fourthPlayer.GetInstanceID());
+            ranking.Add(2);
+            ranking.Add(3);
         }
         else if (team2LavaDeath == 2)
         {
-            ranking.Add(myPlayer.GetInstanceID());
-            ranking.Add(secondPlayer.GetInstanceID());
+            ranking.Add(0);
+            ranking.Add(1);
         }
         else if (deathCount1 < deathCount2)
         {
-            ranking.Add(thirdPlayer.GetInstanceID());
-            ranking.Add(fourthPlayer.GetInstanceID());
+            ranking.Add(2);
+            ranking.Add(3);
         }
         else
         {
-            ranking.Add(myPlayer.GetInstanceID());
-            ranking.Add(secondPlayer.GetInstanceID());
+            ranking.Add(0);
+            ranking.Add(1);
         }
 
         return ranking;

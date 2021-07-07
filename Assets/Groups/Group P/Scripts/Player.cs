@@ -38,7 +38,6 @@ namespace GroupP {
                 float speed = GameManager.instance.getBpmOfActiveSong();
 
                 float hitTime = (note.transform.localPosition.x - rnd) / speed;
-                Debug.Log(rnd + " " + hitTime);
                 
                 float callProbability = 1.0f;
                 if(note.bad) {

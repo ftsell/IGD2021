@@ -26,18 +26,6 @@ namespace GroupP {
             }
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
-
         public void registerPlayer(GameObject player) {
             PlayerStat playerStat = new PlayerStat();
             playerStat.player = player;
@@ -61,7 +49,11 @@ namespace GroupP {
             //TODO call MissedHit() for players who havent hit the note
             foreach(var playerStat in playerStats) {
                 if(!playerStat.hasHitNotes[index] && !note.bad) {
-                    playerStat.player.GetComponent<Score>().Missed();
+                    if(note.special) {
+                        playerStat.player.GetComponent<Score>().SpecialMissed();
+                    } else {
+                        playerStat.player.GetComponent<Score>().Missed();
+                    }
                 }
                 playerStat.hasHitNotes.RemoveAt(index);
                 playerStat.player.GetComponent<Player>().removeNote(note);

@@ -56,9 +56,10 @@ public class TimerCountdown : MonoBehaviour
         if(timerStarted == true && takingAway == false && secondsLeft > 0)
         {
             StartCoroutine(TimerTake());
-        } else if(secondsLeft == 0 && gameHasFinished == false)
+        } else if((secondsLeft == 0 && gameHasFinished == false) || (!gameHasFinished && gameManager_E.totalWinners == 4))
         {
             this.setPlaces();
+            textDisplay.GetComponent<Text>().enabled = false;
             gameHasFinished = true;
             KartRacingGame.Instance.finishGame();
         }

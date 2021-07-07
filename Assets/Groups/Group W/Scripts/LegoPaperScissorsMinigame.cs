@@ -41,7 +41,41 @@ public class LegoPaperScissorsMinigame : MiniGame
     // Start is called before the first frame update
     void Start()
     {
+        // adds input controls and customizations for non-ai players
+        // List<int> playerIds = new List<int>();
+        List<int> playerIds = new List<int>() { 1, 2, 3, 4 };
 
+        List<GameObject> playerGameObjects = new List<GameObject>();
+        var interconnectionsAi = gameObject.GetComponent<InterconnectionsAi>();
+        int i = 1;
+
+        foreach (Transform child in transform)
+        {
+            var playerName = child.Find("LegoPaperScissors").GetComponent<PlayerProperties>().playerName;
+            // print($"player name is {playerName}");
+
+            var IsAiPlayer = interconnectionsAi.IsAiPlayer(playerName);
+            // print($"isAiPlayer is: {IsAiPlayer}");
+            if (!IsAiPlayer)
+            {
+                playerGameObjects.Add(child.gameObject);
+                playerIds.Add(i);
+                // print($"added playerGameObject: {child.gameObject}");
+            }
+
+            i++;
+        }
+
+        try
+        {
+            InitializePlayers(playerGameObjects, playerIds);
+        }
+
+        catch(Exception e)
+        {
+            print("not entering via boardgame or customization scene, initializing locally instead (default input and lego schemes)");
+        }
+      
     }
 
     void Update()

@@ -1,35 +1,68 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollowController : MonoBehaviour
 {
-    public Transform objectToFollow;
-    public Vector3 offset;
-    public float followSpeed = 10f;
-    public float lookSpeed = 10f;
+	public Transform target;
+	public float distance = 20.0f;
+	public float height = 5.0f;
+	public float heightDamping = 2.0f;
 
+	public float lookAtHeight = 0.0f;
 
-    private void LookAtTarget()
-    {
-        Vector3 lookDirection = objectToFollow.position + new Vector3(0, 0, 0.5f) - transform.position;
-        Quaternion rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, lookSpeed * Time.deltaTime);
+	public Rigidbody parentRigidbody;
 
-    }
+	public float rotationSnapTime = 0.3F;
 
-    private void MoveToTarget()
-    {
-        Vector3 targetPos = objectToFollow.position 
-            + objectToFollow.forward * offset.z +
-            objectToFollow.right * offset.x +
-            objectToFollow.up * offset.y;
-        transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed * Time.deltaTime);
-    }
+	public float distanceSnapTime;
+	public float distanceMultiplier;
 
-    private void FixedUpdate()
-    {
-        LookAtTarget();
-        MoveToTarget();
-    }
+	private Vector3 lookAtVector;
+
+	private float usedDistance;
+
+	float wantedRotationAngle;
+	float wantedHeight;
+
+	float currentRotationAngle;
+	float currentHeight;
+
+	Quaternion currentRotation;
+	Vector3 wantedPosition;
+
+	private float yVelocity = 0.0F;
+	private float zVelocity = 0.0F;
+
+	void Start()
+	{
+
+		lookAtVector = new Vector3(0, lookAtHeight, 0);
+
+	}
+
+	void LateUpdate()
+	{
+
+		wantedHeight = target.position.y + height;
+		currentHeight = transform.position.y;
+
+		wantedRotationAngle = target.eulerAngles.y;
+		currentRotationAngle = transform.eulerAngles.y;
+
+		currentRotationAngle = Mathf.SmoothDampAngle(currentRotationAngle, wantedRotationAngle, ref yVelocity, rotationSnapTime);
+
+		currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
+
+		wantedPosition = target.position;
+		wantedPosition.y = currentHeight;
+
+		usedDistance = Mathf.SmoothDampAngle(usedDistance, distance + (parentRigidbody.velocity.magnitude * distanceMultiplier), ref zVelocity, distanceSnapTime);
+
+		wantedPosition += Quaternion.Euler(0, currentRotationAngle, 0) * new Vector3(0, 0, -usedDistance);
+
+		transform.position = wantedPosition;
+
+		transform.LookAt(target.position + lookAtVector);
+
+	}
+
 }

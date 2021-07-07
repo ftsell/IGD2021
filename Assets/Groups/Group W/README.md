@@ -1,26 +1,7 @@
 Im Folgenden finden sich TODOs und DONEs.
 
 ### TODOs
-* __TODOs Polina__
-	* Custom Animationen
-		* Schlagen (für Nahkampfwaffe)
-		* Werfen (für Fernkampfwaffe)
-		* Sterben (langsam und qualvoll zu Boden fallen)
-
-	* Umgebung
-		*  Auswahl + Plazierung Assets für
-			* Spiel-stats (Gesamtlaufzeit des Spiels, verstrichene Zeit, Rundennummer)
-			* Infos zur aktuellen phase (Action vs. Decision vs. Spielende, wie lange ist noch Zeit für den Input in der Decision phase etc)
-		*  Schwarzen Kasten entfernen und durch schönen Himmel + Umgebung ersetzen
-
-
-	* Verschönerungen
-		* Anzeige "Weakness", "Neutral", "Resistence", wenn Charakter angegriffen wurde
-			* in passendem Schriftstil, unsere default weiße Plan mit schwarzem Arial Text ist dafür nicht so nice
-
-* __TODOs Larry__
-	* KI Mitspieler
-	* Tutorial? Brauchen wir das?
+* Finished :)
 
 
 ### DONEs
@@ -89,6 +70,7 @@ Im Folgenden finden sich TODOs und DONEs.
 		* Bestimmung des Gewinner-Teams
 
 	* Integration mit Interconnections Gruppe
+	* KI player
 
 * __DONEs Polina__
 	* Methode/Funktion mit folgendem Verhalten:
@@ -102,7 +84,26 @@ Im Folgenden finden sich TODOs und DONEs.
 		* Zusammenbasteln einer hübschen Umgebung
 			* Boden
 			* Himmel / Decke
-			* Objekte (z.B. Bäume, Gebäude etc.)
+		* Objekte (z.B. Bäume, Gebäude etc.)
 		* Beleuchtung
 		* HP-Balken Grün/Rot
+		*  Auswahl + Plazierung Assets für
+			* Spiel-stats (Gesamtlaufzeit des Spiels, verstrichene Zeit, Rundennummer)
+			* Infos zur aktuellen phase (Action vs. Decision vs. Spielende, wie lange ist noch Zeit für den Input in der Decision phase etc)
+		*  Schwarzen Kasten entfernen und durch schönen Himmel + Umgebung ersetzen
 
+	* Custom Animationen
+		* Schlagen (für Nahkampfwaffe)
+		* Werfen (für Fernkampfwaffe)
+		* Sterben (langsam und qualvoll zu Boden fallen)
+
+	* Verschönerungen
+		* Anzeige "Weakness", "Neutral", "Resistence", wenn Charakter angegriffen wurde
+			* in passendem Schriftstil, unsere default weiße Plan mit schwarzem Arial Text ist dafür nicht so nice
+
+### LICENSE
+* Music included in this project:
+Wuxia2_Orchestra by PeriTune | http://peritune.com
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+Music promoted by https://www.chosic.com/

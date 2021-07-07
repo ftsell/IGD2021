@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     public int ownID;
 
     public TrafficTrouble gameManager;
+    public AudioClip increasingHealth;
 
     void Start()
     {
@@ -37,6 +38,7 @@ public class Health : MonoBehaviour
         if (health < maxHealth && health > 0)
         {
             health++;
+            GetComponent<AudioSource>().PlayOneShot(increasingHealth);
             gameManager.SubmitHealth(ownID, health);
         }
     }

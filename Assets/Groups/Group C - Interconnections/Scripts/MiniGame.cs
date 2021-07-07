@@ -136,36 +136,129 @@ abstract public class MiniGame : MonoBehaviour
 
         //updating texts
         if (firstPlace.Length > 1){
-            if(firstPlace.Length ==2 ){
-                second_place.text = "1st";
+            if(firstPlace.Length == 2 ){
+                if (secondPlace.Length == 2) {
+                    second_place.text = "1st";
+                    third_place.text = "2nd";
+                    fourth_place.text = "2nd";
+
+                    name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
+                    name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
+
+                    name2.text = PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME");
+                    name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME"));
+
+                    name3.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
+                    name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
+
+                    name4.text = PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME");
+                    name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME"));
+                } else{
+                    second_place.text = "1st";
+                    third_place.text = "2nd";
+                    fourth_place.text = "3rd";
+
+                    name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
+                    name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
+
+                    name2.text = PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME");
+                    name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME"));
+
+                    name3.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
+                    name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
+
+                    name4.text = PlayerPrefs.GetString("PLAYER"+thirdPlace[0].ToString()+"_NAME");
+                    name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+thirdPlace[0].ToString()+"_NAME"));
+                }
+                
+            }
+
+            if(firstPlace.Length == 4 ) {
+                    second_place.text = "1st";
+                    third_place.text = "1st";
+                    fourth_place.text = "1st";
+
+                    name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
+                    name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
+                    name2.text = PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME");
+                    name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME"));
+                    name3.text = PlayerPrefs.GetString("PLAYER"+firstPlace[2].ToString()+"_NAME");
+                    name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[2].ToString()+"_NAME"));
+                    name4.text = PlayerPrefs.GetString("PLAYER"+firstPlace[3].ToString()+"_NAME");
+                    name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[3].ToString()+"_NAME"));
+
+            } 
+
+            if (firstPlace.Length == 3) {
+                    second_place.text = "1st";
+                    third_place.text = "1st";
+                    fourth_place.text = "2nd";
+
+                    name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
+                    name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
+                    name2.text = PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME");
+                    name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME"));
+                    name3.text = PlayerPrefs.GetString("PLAYER"+firstPlace[2].ToString()+"_NAME");
+                    name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[2].ToString()+"_NAME"));
+                    name4.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
+                    name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
+            }
+        } 
+
+        if(secondPlace.Length > 1) {
+            if (firstPlace.Length == 1 && secondPlace.Length ==2 ) {
+                third_place.text = "2nd";
+                fourth_place.text = "3rd";
+
+                name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
+                name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
+
+                name2.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
+                name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
+
+                name3.text = PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME");
+                name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME"));
+
+                name4.text = PlayerPrefs.GetString("PLAYER"+thirdPlace[0].ToString()+"_NAME");
+                name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+thirdPlace[0].ToString()+"_NAME"));
+            }
+
+            if (secondPlace.Length == 3){
                 third_place.text = "2nd";
                 fourth_place.text = "2nd";
 
-                Debug.Log("PLAYER"+firstPlace[0].ToString()+"_NAME");
+                name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
+                name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
+
+                name2.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
+                name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
+
+                name3.text = PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME");
+                name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME"));
+
+                name4.text = PlayerPrefs.GetString("PLAYER"+secondPlace[2].ToString()+"_NAME");
+                name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[2].ToString()+"_NAME"));
+            }      
+        }
+
+        if(thirdPlace.Length > 1) {;
+            fourth_place.text = "3rd";
 
                 name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
                 name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
-                name2.text = PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME");
-                name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME"));
-                name3.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
-                name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
-                name4.text = PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME");
-                name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[1].ToString()+"_NAME"));
-            } else{
-                second_place.text = "1st";
-                third_place.text = "1st";
-                fourth_place.text = "2nd";
 
-                name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
-                name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
-                name2.text = PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME");
-                name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[1].ToString()+"_NAME"));
-                name3.text = PlayerPrefs.GetString("PLAYER"+firstPlace[2].ToString()+"_NAME");
-                name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[2].ToString()+"_NAME"));
-                name4.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
-                name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
-            }
-        } else{
+                name2.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");
+                name2.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME"));
+
+                name3.text = PlayerPrefs.GetString("PLAYER"+thirdPlace[0].ToString()+"_NAME");
+                name3.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+thirdPlace[0].ToString()+"_NAME"));
+
+                name4.text = PlayerPrefs.GetString("PLAYER"+thirdPlace[1].ToString()+"_NAME");
+                name4.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+thirdPlace[1].ToString()+"_NAME"));
+        }
+        
+        if(thirdPlace.Length == 1 && secondPlace.Length == 1 && firstPlace.Length == 1 && fourthPlace.Length == 1)
+        {
                 name1.text = PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME");
                 name1.color = ApplyColor(PlayerPrefs.GetString("PLAYER"+firstPlace[0].ToString()+"_NAME"));
                 name2.text = PlayerPrefs.GetString("PLAYER"+secondPlace[0].ToString()+"_NAME");

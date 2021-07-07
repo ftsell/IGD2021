@@ -83,6 +83,11 @@ namespace GroupP
             hitStreak = 0;
         }
 
+        public void SpecialMissed() {
+            Missed();
+            specialMultiplier = 0;
+        }
+
         public void BadHit() {
             badSound.Play();
             gameObject.GetComponent<Controller>().badHit();

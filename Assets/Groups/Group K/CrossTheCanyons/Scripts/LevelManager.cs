@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject platform;
+    public GameObject platform0;
+    public GameObject platform1;
+    public GameObject platform2;
+    public GameObject platform3;
+    public GameObject platform4;
     public GameObject bridge;
-    public GameObject goal;
     public GameObject barrier;
     public GameObject ground;
     public CraneMovement leftCrane;
@@ -45,14 +48,14 @@ public class LevelManager : MonoBehaviour
                 if (leftGoal)
                     return leftGoal.GetGoalPosition();
                 else
-                    return new Vector3(2,2.01f,-2);
+                    return new Vector3(2.2f,2.01f,-2);
             }
             else
             {
                 if (rightGoal)
                     return rightGoal.GetGoalPosition();
                 else
-                    return new Vector3(2,2.01f,2);
+                    return new Vector3(2.2f,2.01f,2);
             }
         }
 
@@ -70,6 +73,20 @@ public class LevelManager : MonoBehaviour
                 return upper? leftGoal.GetUpperExtremeX() : leftGoal.GetLowerExtremeX();
             else
                 return upper? 3.5f : 3.5f;
+        }
+
+        public void MoveGoalDownwards(bool left)
+        {
+            if (left)
+            {
+                if (leftGoal)
+                    leftGoal.MoveGoalDownwards();
+            }
+            else
+            {
+                if (rightGoal)
+                    rightGoal.MoveGoalDownwards();
+            }
         }
     }
     
@@ -104,7 +121,7 @@ public class LevelManager : MonoBehaviour
         UpdateBarriers(lvl, leftRightOffset);
         
         float bridgeWidth = 0.4f;
-        float spawnOffset = platform.transform.localScale.x/2 - levels[lvl].bridgeLength/2;
+        float spawnOffset = platform1.transform.localScale.x/2 - levels[lvl].bridgeLength/2;
         Vector3 newBridgePosition = new Vector3(levels[lvl-1].platformCenter.x, levels[lvl-1].platformCenter.y, 0);
         Vector3 leftBridgeOffset = new Vector3(spawnOffset, distanceBridgeToPlatformCenter, -5/2 + bridgeWidth/2) - leftRightOffset + centerOffset;
         Vector3 rightBridgeOffset = new Vector3(spawnOffset, distanceBridgeToPlatformCenter, +5/2 - bridgeWidth/2) + leftRightOffset - centerOffset;
@@ -186,18 +203,56 @@ public class LevelManager : MonoBehaviour
         float nextCenterDistance = Random.Range(minCenterDistance, maxCenterDistance);
         float nextPlatformRotation = Random.Range(-maxRotation, maxRotation);
         Vector3 newPlatformCenter = new Vector3(oldPlatformCenter.x - nextCenterDistance, oldPlatformCenter.y, oldPlatformCenter.z);
-        Vector3 leftRightOffset = new Vector3(0, 0, platform.transform.localScale.z/2);
-        GameObject leftPlatform = Instantiate(platform, newPlatformCenter - leftRightOffset, Quaternion.Euler(0, -nextPlatformRotation, 0));
-        GameObject rightPlatform = Instantiate(platform, newPlatformCenter + leftRightOffset, Quaternion.Euler(0, 180.0f + nextPlatformRotation, 0));
+        Vector3 leftRightOffset = new Vector3(0, 0, platform1.transform.localScale.z/2);
+        int randomness = Random.Range(0,5);
+        GameObject leftPlatform;
+        switch(randomness)
+        {
+            case 1:
+                leftPlatform = Instantiate(platform1, newPlatformCenter - leftRightOffset, Quaternion.Euler(0, -nextPlatformRotation, 0));
+                break;
+            case 2:
+                leftPlatform = Instantiate(platform2, newPlatformCenter - leftRightOffset, Quaternion.Euler(0, -nextPlatformRotation, 0));
+                break;
+            case 3:
+                leftPlatform = Instantiate(platform3, newPlatformCenter - leftRightOffset, Quaternion.Euler(0, -nextPlatformRotation, 0));
+                break;
+            case 4:
+                leftPlatform = Instantiate(platform4, newPlatformCenter - leftRightOffset, Quaternion.Euler(0, -nextPlatformRotation, 0));
+                break;
+            default:
+                leftPlatform = Instantiate(platform0, newPlatformCenter - leftRightOffset, Quaternion.Euler(0, -nextPlatformRotation, 0));
+                break;
+        }
+        randomness = Random.Range(0,5);
+        GameObject rightPlatform;
+        switch(randomness)
+        {
+            case 1:
+                rightPlatform = Instantiate(platform1, newPlatformCenter + leftRightOffset, Quaternion.Euler(0, 180.0f + nextPlatformRotation, 0));
+                break;
+            case 2:
+                rightPlatform = Instantiate(platform2, newPlatformCenter + leftRightOffset, Quaternion.Euler(0, 180.0f + nextPlatformRotation, 0));
+                break;
+            case 3:
+                rightPlatform = Instantiate(platform3, newPlatformCenter + leftRightOffset, Quaternion.Euler(0, 180.0f + nextPlatformRotation, 0));
+                break;
+            case 4:
+                rightPlatform = Instantiate(platform4, newPlatformCenter + leftRightOffset, Quaternion.Euler(0, 180.0f + nextPlatformRotation, 0));
+                break;
+            default:
+                rightPlatform = Instantiate(platform0, newPlatformCenter + leftRightOffset, Quaternion.Euler(0, 180.0f + nextPlatformRotation, 0));
+                break;
+        }
         float newGoalOffset = Random.Range(-0.5f, 1.5f);
         GoalManager leftGoalManager = leftPlatform.GetComponent<GoalManager>();
         GoalManager rightGoalManager = rightPlatform.GetComponent<GoalManager>();
         leftGoalManager.MoveGoal(newGoalOffset);
         rightGoalManager.MoveGoal(newGoalOffset);
-        float additionalBridgeLength = 10/(level+10) + 0.125f;
+        float additionalBridgeLength = 1.0f / (level + 6.0f) * 6.0f - 0.3f;
         float bridgeLength = (oldLeftGoal - leftGoalManager.GetGoalPosition()).magnitude + additionalBridgeLength - 1;
 
-        levels.Add(new Level(newPlatformCenter, leftGoalManager, rightGoalManager, bridgeLength, nextCenterDistance - platform.transform.localScale.x));
+        levels.Add(new Level(newPlatformCenter, leftGoalManager, rightGoalManager, bridgeLength, nextCenterDistance - platform1.transform.localScale.x));
     }
 
     public (Vector3 leftGoal, Vector3 rightGoal) GetCurrentGoals()
@@ -231,5 +286,10 @@ public class LevelManager : MonoBehaviour
         {
             barrier.SetActive(true);
         }
+    }
+
+    public void MoveGoalDownwards(bool left)
+    {
+        levels[currentLevel].MoveGoalDownwards(left);
     }
 }

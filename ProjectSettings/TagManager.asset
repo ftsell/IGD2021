@@ -11,6 +11,12 @@ TagManager:
   - Tile
   - StartTile
   - ItemCreditThief
+  - Undefined
+  - Credit
+  - K_Prop
+  - K_Ground
+  - Lava
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -26,8 +32,8 @@ TagManager:
   - Camera 4
   - 
   - 
-  - 
-  - 
+  - Undefined
+  - Credit
   - MinimapVisibleD
   - 
   - NoSameLayerCollision

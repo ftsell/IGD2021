@@ -98,9 +98,9 @@ public class GameController_G : MiniGame, IPowerUpEvents
     {
         TimerController.instance.BeginTimer();
         GamePlaying = true;
-        SetPlayerControllersActive(true);
         SetPlayersAIState();
         InputManager.Instance.AssignPlayerInput(GetAllPlayerInputs());
+        SetPlayerControllersActive(true);
         //LoadingManager.Instance.LoadMiniGame(getMiniGameType()); 
     }
 
@@ -112,15 +112,16 @@ public class GameController_G : MiniGame, IPowerUpEvents
 
         int[] playerIDs = { 0, 1, 2 };
         int[] passivePlayerId = { 3 };
+        int[] emptyArray = { };
         if (Players.Count == 0)
         {
             Debug.Log("Single Player wins!");
-            MiniGameFinished(passivePlayerId, playerIDs, new int[0], new int[0]);
+            MiniGameFinished(passivePlayerId, playerIDs, emptyArray, emptyArray);
         }
         else
         {
             Debug.Log("Team wins!");
-            MiniGameFinished(playerIDs, passivePlayerId, new int[0], new int[0]);
+            MiniGameFinished(playerIDs, passivePlayerId, emptyArray, emptyArray);
         }
     }
 

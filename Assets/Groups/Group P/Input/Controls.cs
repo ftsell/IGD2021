@@ -1372,6 +1372,17 @@ namespace GroupP
                 },
                 {
                     ""name"": """",
+                    ""id"": ""028520bf-1e04-445a-9de4-f535e8c6cf9e"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UpPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7e0c17a3-9dbc-411f-b32c-eb4395e0d913"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -1410,6 +1421,17 @@ namespace GroupP
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardNum"",
+                    ""action"": ""LeftPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1657c9fd-c5c6-471c-8631-6e559b772051"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""LeftPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1460,6 +1482,17 @@ namespace GroupP
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6dd307e3-8bd4-4cab-a09c-aa558663d2df"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RightPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b76c8192-248d-4cb2-a20e-27b6f6c8ad12"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -1498,6 +1531,17 @@ namespace GroupP
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardNum"",
+                    ""action"": ""DownPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fb0a486-9b8c-49b3-8feb-bdd2ae02e6a6"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""DownPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

@@ -233,6 +233,10 @@ PrefabInstance:
       propertyPath: m_DefaultControlScheme
       value: KeyboardZGHJ
       objectReference: {fileID: 0}
+    - target: {fileID: 1149730221, guid: ba6dca5006325334e83731e45cd27222, type: 3}
+      propertyPath: healthBarOffsetY
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 722604870696496883, guid: ba6dca5006325334e83731e45cd27222,
         type: 3}
       propertyPath: m_Name
@@ -293,10 +297,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1243268596763780371, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1960826808590049888, guid: ba6dca5006325334e83731e45cd27222,
         type: 3}
       propertyPath: Type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960826808590049888, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: AI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146175524067100160, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146175524067100160, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.4
       objectReference: {fileID: 0}
     - target: {fileID: 3171408798241915155, guid: ba6dca5006325334e83731e45cd27222,
         type: 3}
@@ -304,12 +328,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8856809096022201352, guid: adbc9593405900e46907d219636f32b0,
         type: 3}
+    - target: {fileID: 3575292637860777638, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3575292637860777638, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: -1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4454323430163429173, guid: ba6dca5006325334e83731e45cd27222,
         type: 3}
       propertyPath: Bullet
       value: 
       objectReference: {fileID: 8856809096022201352, guid: adbc9593405900e46907d219636f32b0,
         type: 3}
+    - target: {fileID: 4893732717737410562, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893732717737410562, guid: ba6dca5006325334e83731e45cd27222,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5956603369243297731, guid: ba6dca5006325334e83731e45cd27222,
         type: 3}
       propertyPath: m_AnchorMax.x

@@ -18,6 +18,7 @@ public class GameTimer : MonoBehaviour
     private bool nextRandomDestructionTime = true;
     private GameManagerJ gameplayManager;
 
+
     void Awake()
     {
         gameplayManager = GameObject.FindObjectOfType<GameManagerJ>();
@@ -53,7 +54,7 @@ public class GameTimer : MonoBehaviour
     {
         if (timerIsRunning)
         {
-            if (timeRemaining > 0)
+           if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
@@ -61,7 +62,11 @@ public class GameTimer : MonoBehaviour
                 {
                     if (timerPlate < 0)
                     {
-                        plateDistruction(0);
+                        Transform platepart = plateDistruction(0);
+                        if (platepart != null)
+                        {
+                            StartCoroutine(DestroyPlatformComponent(platepart,5));
+                        }
                         timerPlate = maxTimeUntilPlateDestruction;
                         nextRandomDestructionTime = true;
 
@@ -98,7 +103,7 @@ public class GameTimer : MonoBehaviour
     }
 
     //This method is using itself. The loop will stop looping after 10 iterations!
-    void plateDistruction(int count)
+    Transform plateDistruction(int count)
     {
         try
         {
@@ -128,7 +133,7 @@ public class GameTimer : MonoBehaviour
             {
                 Transform child = allChildren[rdm];
                 allChildrenBoolean[rdm] = false;
-                child.gameObject.SetActive(false);
+                return child;
             }
             else
             {
@@ -138,10 +143,29 @@ public class GameTimer : MonoBehaviour
                 }
             }
 
-
+            return null;
         }
+        
+        catch { return null; }
+    }
 
-        catch { }
+    IEnumerator DestroyPlatformComponent(Transform component, float seconds)
+    {
+        Debug.Log("start destroy");
+        float elapsedTime = 0;
+        while (elapsedTime < seconds) 
+        {
+            elapsedTime += Time.deltaTime;
+            component.gameObject.transform.Rotate(Vector3.right * (5 * Time.deltaTime));
+            component.gameObject.transform.position += (Vector3.down* (Time.deltaTime/5));
+            Physics.IgnoreLayerCollision(component.gameObject.layer,21,true);
+            //Debug.Log("Destroy: "+ Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+            // component.transform.position -= transform.up * (5 * 1);
+        } 
+        
+        Debug.Log("destroyed component");
+        Destroy(component.gameObject);
     }
 
 

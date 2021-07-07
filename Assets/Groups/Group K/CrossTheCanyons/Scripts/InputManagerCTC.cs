@@ -16,7 +16,7 @@ public class InputManagerCTC : MonoBehaviour
     private bool player3_AI;
     private bool player4_AI;
 
-    void Start()
+    public void InitAIstatus()
     {
         List<PlayerInput> playerInputs = new List<PlayerInput>()
         {
@@ -28,10 +28,11 @@ public class InputManagerCTC : MonoBehaviour
 
         //optional return value is not used
         InputManager.Instance.AssignPlayerInput(playerInputs);
-        player1_AI = PlayerPrefs.GetString("Player1_AI").Equals("True");
-        player2_AI = PlayerPrefs.GetString("Player2_AI").Equals("True");
-        player3_AI = PlayerPrefs.GetString("Player3_AI").Equals("True");
-        player4_AI = PlayerPrefs.GetString("Player4_AI").Equals("True");
+        player1_AI = PlayerPrefs.GetString("PLAYER1_AI").Equals("True");
+        player2_AI = PlayerPrefs.GetString("PLAYER2_AI").Equals("True");
+        player3_AI = PlayerPrefs.GetString("PLAYER3_AI").Equals("True");
+        player4_AI = PlayerPrefs.GetString("PLAYER4_AI").Equals("True");
+        Debug.Log("AI status: " + player1_AI + " " + player2_AI + " " + player3_AI + " " + player4_AI);
     }
 
     /**

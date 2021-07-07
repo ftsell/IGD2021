@@ -17,12 +17,21 @@ public class PlayerStats : MonoBehaviour
     public PowerUp power;
     public bool hasPowerup;
     public bool hasWhiteBrick;
+    private bool hasFinished;
+
     public Image imageWhiteBrick;
+    public Image imagePowerupSpeed;
+    public Image imagePowerupAttack;
+    public Image imagePowerupReverse;
+    public Image imagePowerupShield;
+
     public bool hasShield;
     public ParticleSystem psShield;
     private ParticleSystem psSpeed;
+    private ParticleSystem psReverseSteer;
     public GameObject myVFX;
     public AudioSource audioShield;
+    public AudioSource audioReverseSteer;
     private ParticleSystem.EmissionModule emmision;
     public int playerNumber;
 
@@ -32,14 +41,36 @@ public class PlayerStats : MonoBehaviour
         rounds = 0;
         hasPowerup = false;
         hasWhiteBrick = false;
+        hasFinished = false;
         imageWhiteBrick.enabled = false;
+        imagePowerupSpeed.enabled = false;
+        imagePowerupAttack.enabled = false;
+        imagePowerupReverse.enabled = false;
+        imagePowerupShield.enabled = false;
 
         var shield = transform.Find("ShieldSoftBlue");
         var speed = transform.Find("MagicChargeBlue");
+        var reverseSteer = transform.Find("ReversedWheelsEffect");
+        psReverseSteer = reverseSteer.GetComponent<ParticleSystem>();
         psShield = shield.GetComponent<ParticleSystem>();
         audioShield = shield.GetComponent<AudioSource>();
+        audioReverseSteer = reverseSteer.GetComponent<AudioSource>();
         emmision = psShield.emission;
         psSpeed = speed.GetComponent<ParticleSystem>();
+
+        int position;
+    }
+
+    public void StartReverseSteer()
+    {
+        psReverseSteer.Play();
+        audioReverseSteer.Play();
+    }
+
+    public void StopReverseSteer()
+    {
+        psReverseSteer.Stop();
+        audioReverseSteer.Stop();
     }
 
     public void StartShield()
@@ -80,6 +111,14 @@ public class PlayerStats : MonoBehaviour
         } else
         {
             textRounds.text = "You finished!";
+            hasFinished = true;
+            CarController carController = this.GetComponent<CarController>();
+            carController.DisableControl();
+
+            if (this.TryGetComponent(out NavAgentScript_E agent))
+            {
+                agent.DisableAgentFinish();
+            }
         }
     }
 
@@ -87,10 +126,15 @@ public class PlayerStats : MonoBehaviour
     {
         hasPowerup = false;
         power = null;
-        textPowerup.text = "Powerup: ";
+        //textPowerup.text = "Powerup: ";
         hasWhiteBrick = false;
         imageWhiteBrick.enabled = false;
-    }
+
+        imagePowerupSpeed.enabled = false;
+        imagePowerupAttack.enabled = false;
+        imagePowerupReverse.enabled = false;
+        imagePowerupShield.enabled = false;
+}
 
     public float GetDistance()
     {
@@ -100,19 +144,23 @@ public class PlayerStats : MonoBehaviour
 
     public int GetKartPosition(List<Transform> carTransformList)
     {
-        float distance = GetDistance();
-        int position = 1;
-        //Debug.Log("Distance Cart: " + distance);
-        foreach (Transform car in carTransformList)
+        if(!hasFinished)
         {
-            PlayerStats thePlayer = car.GetComponent<PlayerStats>();
-            if (thePlayer.GetDistance() > distance)
+            float distance = GetDistance();
+            position = 1;
+            //Debug.Log("Distance Cart: " + distance);
+            foreach (Transform car in carTransformList)
             {
-                position++;
+                PlayerStats thePlayer = car.GetComponent<PlayerStats>();
+                if (thePlayer.GetDistance() > distance)
+                {
+                    position++;
+                }
             }
+            //Debug.Log("Position: " + position);
+            textPosition.text = "Position: " + position + "/4";
+            return position;
         }
-        //Debug.Log("Position: " + position);
-        textPosition.text = "Position: " + position + "/4";
         return position;
     }
 }

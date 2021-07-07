@@ -8,6 +8,8 @@ public class TestingGame : MiniGame
     public GameObject myPlayer;
     public GameObject secondPlayer;
 
+    public GameObject loadingScreen;
+
     public override string getDisplayName(){
         return "My Awesome Game!";
     }
@@ -36,7 +38,7 @@ public class TestingGame : MiniGame
 
 
         //Different configurations for the final scores and Game Over
-        //MiniGameFinished(new int []{1,2}, new int []{3,4}, new int []{},new int []{});
+        MiniGameFinished(new int []{1,2}, new int []{3,4}, new int []{},new int []{});
         //MiniGameFinished(new int []{3,2,4}, new int []{1}, new int []{},new int []{});
       
         PlayerPrefs.SetString("PLAYER1_NAME", "RED");

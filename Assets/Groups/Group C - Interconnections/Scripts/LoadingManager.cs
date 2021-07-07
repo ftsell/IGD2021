@@ -16,6 +16,13 @@ public class LoadingManager : MonoBehaviour
 
     public GameObject _randomPicker;
 
+    //public Animator transition;
+
+    public float transitionTime = 1f;
+
+    //Provide Prefab LevelLoader
+    public GameObject levelLoader;
+
     //this method is just for testing, it must be removed at the end.
     void Start()
     {   
@@ -30,6 +37,7 @@ public class LoadingManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 
     public void LoadMiniGame (MiniGameType miniGameType) {
 
@@ -98,18 +106,32 @@ public class LoadingManager : MonoBehaviour
         return elements;
     }
 
-    public void LoadMainBoardGame() {
+    public void LoadMainBoardGame()
+    {
         //Load main board if we are not in it
+        StartCoroutine( LoadScene() );
+        
+    }
+
+    IEnumerator LoadScene()
+    {
+
+        // Create prefab
+        try
+        {
+            var myLevelLoader = Instantiate(levelLoader);
+            Animator transition = myLevelLoader.transform.Find("Crossfade").GetComponent<Animator>();
+
+            transition.SetTrigger("Start");
+        } catch (System.Exception e)
+        {
+            print("Level Loader Prefab was not provided: " + e);
+        }
+        
+
+        yield return new WaitForSeconds(transitionTime);
+
         SceneManager.LoadSceneAsync(GameList.MAIN_BOARD_SCENE);
-    }
-    
-    private void DisplayLoadingScreen() {
-
-    }
-
-    private void HideLoadingScreen() {
-        //MyGame game = new MyGame("My Awesome Game", "SceneName", MiniGameType.freeForAll);
-        //game.sceneName = "WERR";
     }
 
     //Display UI that shows roulette to select from a random game
@@ -228,8 +250,22 @@ public class LoadingManager : MonoBehaviour
         //show selected game
         banner.text = bannerText;
         banner.enabled= true;
-        yield return new WaitForSeconds(1f);
+
+        //Create prefab
+        var myLevelLoader = Instantiate(levelLoader);
+        Animator transition = myLevelLoader.transform.Find("Crossfade").GetComponent<Animator>();
+
+        //Start transition
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
+
+        //ActuallyLoadScene
         SceneManager.LoadSceneAsync(this.nextScene);
+
+
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
     }
 
 }

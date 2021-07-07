@@ -42,7 +42,7 @@ public class StatusPlane : MonoBehaviour
 
             if (phase == PhaseHandler.Phase.Decision)
             {
-                description = "Select your opponent and weapon!";
+                description = "Select opponent and weapon!";
                 descriptionTextMesh.text += $"\nTime left: {timeLeft.ToString("F0")} seconds";
             }
 

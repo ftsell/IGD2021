@@ -23,9 +23,9 @@ public class InputManager : MonoBehaviour
 
     private List<Tuple<int, int, string>> playerSchemes = new List<Tuple<int, int, string>>();
 
-    public List<Color> players_colors = new List<Color>{Color.red, Color.yellow, Color.magenta, Color.blue};
-    public List<string> players_colors_names = new List<string>{"RED", "YELLOW", "PINK", "BLUE"};
-    public List<int> ids_players = new List<int>{1, 2, 3, 4};
+    public List<Color> players_colors = new List<Color> { Color.red, Color.yellow, Color.magenta, Color.blue };
+    public List<string> players_colors_names = new List<string> { "RED", "YELLOW", "PINK", "BLUE" };
+    public List<int> ids_players = new List<int> { 1, 2, 3, 4 };
 
     private List<CustomCharacter> customCharacterList = new List<CustomCharacter>();
 
@@ -47,10 +47,10 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-       
+
     }
 
-    
+
     //Assign control scheme that was read from the character selection
     /**
      * Use this method when testing the whole game (the one that includes character selection and board game)
@@ -145,7 +145,8 @@ public class InputManager : MonoBehaviour
         else
         {
             bool shouldInsert = true;
-            foreach(Tuple<int, int, string> scheme in playerSchemes) {
+            foreach (Tuple<int, int, string> scheme in playerSchemes)
+            {
                 if (String.Compare(scheme.Item3, playerScheme.Item3) == 0)
                 {
                     shouldInsert = false;
@@ -156,10 +157,10 @@ public class InputManager : MonoBehaviour
             {
                 if (playerSchemes.Count == (4 - ids_players.Count))
                 {
-                    print("Control Scheme Saved: " + playerScheme.Item3 );
+                    print("Control Scheme Saved: " + playerScheme.Item3);
                     playerSchemes.Add(playerScheme);
                 }
-                
+
             }
         }
     }
@@ -205,6 +206,11 @@ public class InputManager : MonoBehaviour
     //Assuming that players id are 1, 2, 3, 4
     public void ApplyPlayerCustomization(GameObject player, int playerId)
     {
+        if (playerId < 1 || playerId > 4 || customCharacterList.Count == 0)
+        {
+            return;
+        }
+
         //Base Minifig and corresponding custom deisgn
         var minifigComponent = player.transform.Find("Minifig Character").transform.Find("Geo_grp");
         CustomCharacter customCharacter = customCharacterList[playerId - 1];

@@ -41,17 +41,26 @@ public class MoveToMiddleBehaviour : StateMachineBehaviour
         {
             currentPath = new NavMeshPath();
             Vector3 targetPosition = new Vector3(0, 0, 0);
-            NavMesh.CalculatePath(player.transform.position, targetPosition, NavMesh.AllAreas, currentPath);
-            if (currentPath.corners.Length >= 2)
-            {
-                playerController.MoveTo(currentPath.corners[1]);
-            }
             if (playerController.hasPowerUp())
             {
                 playerController.SpawnPowerUp();
                 playerController.MoveTo(targetPosition, maxMoveTime: 1.5f);
+            } else {
+
+                NavMesh.CalculatePath(player.transform.position, targetPosition, NavMesh.AllAreas, currentPath);
+                if (currentPath.corners.Length >= 2)
+                {
+                    if(Vector3.Distance(player.transform.position, currentPath.corners[1]) > 0.5f)
+                    {
+                        playerController.MoveTo(currentPath.corners[1]);
+                    } else if(currentPath.corners.Length > 2)
+                    {
+                        Vector3 jumpGoal = currentPath.corners[2];
+                        playerController.MoveTo(jumpGoal);
+                        playerController.AddForce(new Vector3(0, playerController.jumpSpeed, 0));
+                    }
+                }
             }
-            
         }
     }
 

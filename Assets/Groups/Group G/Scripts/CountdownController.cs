@@ -7,6 +7,7 @@ public class CountdownController : MonoBehaviour
 {
     public int CountdownTime = 3;
     public Text CountdownDisplay;
+    public Canvas ControlsCanvas;
 
     private GameController_G GameController;
     void Start()
@@ -33,5 +34,7 @@ public class CountdownController : MonoBehaviour
         GameController.BeginGame();
         yield return new WaitForSeconds(1.5f);
         CountdownDisplay.gameObject.SetActive(false);
+        ControlsCanvas.gameObject.SetActive(false);
+
     }
 }

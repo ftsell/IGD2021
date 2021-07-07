@@ -14,9 +14,9 @@ public class InputAssigner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InputManager.Instance.AssignPlayerInput(players);
-
         for (int i = 0; i < 4; i++) {
+            InputManager.Instance.AssignPlayerInput(players[i], i+1);
+            
             if (!PlayerPrefs.GetString("PLAYER" + (i+1).ToString() + "_AI").Equals("True")) {
                 // skip AIs
                 InputManager.Instance.ApplyPlayerCustomization(characters[i], i+1);

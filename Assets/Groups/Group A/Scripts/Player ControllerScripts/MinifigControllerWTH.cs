@@ -89,7 +89,7 @@ public class MinifigControllerWTH : MonoBehaviour
     public float jumpSpeed = 20f;
     public float gravity = 40f;
     public float pushSpeed = 20f;
-    public float drag = 0.93f;
+    public float drag = 0.5f;
     public float pointLossRate = 0.75f;
     private Vector2 _movement = new Vector2();
     [Header("Audio")]
@@ -242,6 +242,7 @@ public class MinifigControllerWTH : MonoBehaviour
         if (activate)
         {
             AIStateMachine.SetTrigger("AiIsActive");
+            isAi = activate;
         }
     }
 
@@ -260,7 +261,7 @@ public class MinifigControllerWTH : MonoBehaviour
         }
 
         // Handle input.
-        if (inputEnabled)
+        if (inputEnabled && !isAi)
         {
             // Calculate direct speed and speed.
             var right = Vector3.right;
@@ -322,16 +323,7 @@ public class MinifigControllerWTH : MonoBehaviour
             // Calculate move delta.
             moveDelta = new Vector3(directSpeed.x , moveDelta.y, directSpeed.z);
 
-            // Apply external Force 
-            if(Mathf.Abs(externalForce.x) > 0f || Mathf.Abs(externalForce.z) > 0f)
-            {
-                externalForce.x *= drag;
-                externalForce.z *= drag;
-                if (Mathf.Abs( externalForce.x) < 0.005f) externalForce.x = 0f;
-                if (Mathf.Abs(externalForce.z) < 0.005f) externalForce.z = 0f;
-                moveDelta.z += externalForce.z;
-                moveDelta.x += externalForce.x;
-            }
+
 
             // Check if player is grounded.
             if (!airborne)
@@ -527,6 +519,32 @@ public class MinifigControllerWTH : MonoBehaviour
             }
         }
 
+        // Apply external Force 
+        if (Mathf.Abs(externalForce.x) > 0.3f || Mathf.Abs(externalForce.z) > 0.3f)
+        {
+
+
+            if (externalForce.x > 0)
+            {
+                externalForce.x -= drag * Time.deltaTime;
+            }
+            else
+            {
+                externalForce.x += drag * Time.deltaTime;
+            }
+            if (externalForce.z > 0)
+            {
+                externalForce.z -= drag * Time.deltaTime;
+            }
+            else
+            {
+                externalForce.z += drag * Time.deltaTime;
+            }
+            if (Mathf.Abs(externalForce.x) < drag * Time.deltaTime) externalForce.x = 0f;
+            if (Mathf.Abs(externalForce.z) < drag * Time.deltaTime) externalForce.z = 0f;
+            moveDelta.z += externalForce.z;
+            moveDelta.x += externalForce.x;
+        }
         // Handle external motion.
         externalMotion = Vector3.zero;
         externalRotation = 0.0f;
@@ -763,7 +781,7 @@ public class MinifigControllerWTH : MonoBehaviour
             MinifigControllerWTH hitCharacterController = hit.collider.GetComponentInParent<MinifigControllerWTH>();
             hitCharacterController.AddForce(pushDir);
         }
-        if (hit.collider.tag == "floor") 
+        if (hit.collider.tag == "Respawn") 
         {
             Respawn();
         }
@@ -1007,6 +1025,8 @@ public class MinifigControllerWTH : MonoBehaviour
             Destroy(equipment);
            // equipment = null;
         }
+        externalForce = new Vector3(0, 0, 0);
+        inventory = null;
     }
 
     public void AddPoints(int points)
@@ -1071,6 +1091,21 @@ public class MinifigControllerWTH : MonoBehaviour
         {
             SpawnPowerUp();
         }
+    }
+    public void HitWithBat()
+    {
+        if (equipment != null)
+        {
+            animator.SetTrigger(punchHash);
+        }
+        else if (inventory != null)
+        {
+            SpawnPowerUp();
+        }
+    }
+    public bool hasEquipment()
+    {
+        return equipment != null || inventory != null;
     }
     public bool hasPowerUp()
     {

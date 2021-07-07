@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 617928916788650792}
   - component: {fileID: 617928916788650807}
   - component: {fileID: 617928916788650806}
-  - component: {fileID: 617928916788650805}
   - component: {fileID: 617928916788650804}
+  - component: {fileID: -4154034969254762626}
   m_Layer: 0
   m_Name: ItemShield
   m_TagString: Item
@@ -95,18 +95,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &617928916788650805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617928916788650803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e472b7832f017488a0c198d450726d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &617928916788650804
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,3 +111,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &-4154034969254762626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617928916788650803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7170c2e177b4d8d4cad72ee46f788b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerUpType: 1
+  pickUpEffect: {fileID: 113646, guid: b947d8a162e5b9a4a8d59dea939836dc, type: 3}

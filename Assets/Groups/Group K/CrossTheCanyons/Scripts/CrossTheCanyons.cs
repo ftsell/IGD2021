@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class CrossTheCanyons : MiniGame
 {
+    public InputManagerCTC inputManagerCTC;
     public void GameOver(int leftPlayerFinalLevel, int rightPlayerFinalLevel)
     {
         int[] firstPlace;
         int[] secondPlace;
         if (leftPlayerFinalLevel > rightPlayerFinalLevel)
         {
-            firstPlace = new int[] {0,1};
-            secondPlace = new int[] {2,3};
+            firstPlace = new int[] {1,2};
+            secondPlace = new int[] {3,4};
         }
         else if (rightPlayerFinalLevel > leftPlayerFinalLevel)
         {
-            firstPlace = new int[] {2,3};
-            secondPlace = new int[] {0,1};
+            firstPlace = new int[] {3,4};
+            secondPlace = new int[] {1,2};
         }
         else
         {
-            firstPlace = new int[] {0,1,2,3};
-            secondPlace = null;
+            firstPlace = new int[] {1,2,3,4};
+            secondPlace = new int[] {};
         }
-        MiniGameFinished(firstPlace, secondPlace, null, null);
+        MiniGameFinished(firstPlace, secondPlace, new int[] {}, new int[] {});
     }
 
     public override string getDisplayName()
@@ -38,5 +39,10 @@ public class CrossTheCanyons : MiniGame
     public override MiniGameType getMiniGameType()
     {
         return MiniGameType.teamVsTeam;
+    }
+
+    void Start() 
+    {
+        inputManagerCTC.InitAIstatus();
     }
 }

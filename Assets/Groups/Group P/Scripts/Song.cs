@@ -10,7 +10,7 @@ namespace GroupP {
 
         public float beatsPerMinute;
         public int totalNumberOfBeats;
-        public float offset;
+        public float offsetInSeconds;
 
         void Start()
         {

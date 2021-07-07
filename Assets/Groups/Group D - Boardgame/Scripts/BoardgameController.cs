@@ -1004,6 +1004,16 @@ public class BoardgameController : MonoBehaviour
         });
     }
 
+    /// moves this player to the given tile (should be a neighboring tile, or the animation will be weird)
+    /// must not be called when  animationDone() == false
+    public void TeleportToTile(Tile nextTile) { 
+        animationCompleted = true;
+
+        Vector3 nextPos = nextTile.getPosition() + tileCenterOffset;
+
+        TeleportTo(nextPos);
+    }
+
     /// returns whether any (movement) animation was completed
     public bool animationDone() {
         // TODO: extend to support animations other than moving around

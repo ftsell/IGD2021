@@ -37,7 +37,7 @@ public class RingMoverRight : MonoBehaviour
             {
                 if (Time.time <= RingMoverManager.instance.tr_enter + RingMoverManager.instance.dur)
                 {
-                    GenerateRings.instance.RotateRing(2, -RingMoverManager.instance.speed);
+                    GenerateRings.instance.RotateRing(2, -RingMoverManager.instance.speed /2);
                     Debug.Log("Mover: turn the table");
                 }
 

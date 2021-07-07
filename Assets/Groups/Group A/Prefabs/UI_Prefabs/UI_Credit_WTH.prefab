@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 1482920448432589042}
   m_Layer: 5
   m_Name: UI_Credit_WTH
-  m_TagString: Untagged
+  m_TagString: Credit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -15,6 +15,9 @@ public class MinifigControllerH : MonoBehaviour
     const float distanceEpsilon = 0.1f;
     const float angleEpsilon = 0.1f;
 
+    public bool disableControls = false;
+
+    public float controllerTimer = 99f;
 
     // Internal classes used to define targets when automatically animating.
     class MoveTarget
@@ -55,7 +58,7 @@ public class MinifigControllerH : MonoBehaviour
     }
 
     // State used when automatically animating.
-    enum State
+    public enum State
     {
         Idle,
         Moving,
@@ -156,7 +159,6 @@ public class MinifigControllerH : MonoBehaviour
         Wave = 49
     }
 
-
     CharacterController controller;
     Animator animator;
     AudioSource audioSource;
@@ -172,7 +174,7 @@ public class MinifigControllerH : MonoBehaviour
     MoveTarget currentMove;
     FollowTarget currentFollowTarget;
     TurnTarget currentTurnTarget;
-    State state;
+    public State state;
     float waitedTime = 0.0f;
 
     float speed;
@@ -225,6 +227,15 @@ public class MinifigControllerH : MonoBehaviour
 
     void Update()
     {
+        if (controllerTimer > 0)
+        {
+            controllerTimer -= 1 * Time.deltaTime;
+        }
+        if (controllerTimer < 0)
+        {//Players can't move when time is up or when three players are ghosts (Game Over)
+            disableMovement();
+        }
+
         if (exploded)
         {
             return;
@@ -603,6 +614,17 @@ public class MinifigControllerH : MonoBehaviour
         animator.SetBool(groundedHash, !airborne);
     }
 
+    public void SetAIActive()
+    {
+        disableControls = true; //Disable Buttons (NorthEathSouthWest) for AI only
+    }
+
+    public void disableMovement()
+    {
+        controller.enabled = false; //Disable Movement (WASD)
+        disableControls = true; //Disable Buttons (NorthEathSouthWest) for all players at this point
+    }
+
     public void SetInputEnabled(bool enabled)
     {
         inputEnabled = enabled;
@@ -642,8 +664,6 @@ public class MinifigControllerH : MonoBehaviour
         transform.position = position;
         controller.enabled = true;
     }
-
-
 
     public void MoveTo(Vector3 destination, float minDistance = 0.0f, Action onComplete = null, float onCompleteDelay = 0.0f,
         float moveDelay = 0.0f, bool cancelSpecial = true, float speedMultiplier = 1.0f, float rotationSpeedMultiplier = 1.0f, Vector3? turnToWhileCompleting = null)
@@ -1007,8 +1027,11 @@ public class MinifigControllerH : MonoBehaviour
     private void OnEastPress()
     {
         print("OnEastPress");
-        Grab();
 
+        if(disableControls == false)
+        {
+            Grab();
+        }
     }
 
     private void OnEastRelease()
@@ -1023,7 +1046,7 @@ public class MinifigControllerH : MonoBehaviour
 
         // Check if player is jumping.
 
-        if (!airborne || jumpsInAir > 0)
+        if ( (!airborne || jumpsInAir > 0) && disableControls == false)
         {
             if (airborne)
             {
@@ -1059,7 +1082,11 @@ public class MinifigControllerH : MonoBehaviour
     private void OnWestPress()
     {
         print("OnWestPress");
-        Kick();
+
+        if (disableControls == false)
+        {
+            Kick();
+        }
     }
 
     private void OnWestRelease()
@@ -1080,6 +1107,11 @@ public class MinifigControllerH : MonoBehaviour
     public void Grab()
     {
         grabber.Grab();
+    }
+
+    public State returnState()
+    {
+        return state;
     }
 }
 

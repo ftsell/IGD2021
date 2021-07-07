@@ -6,7 +6,6 @@ public class RespawnJ : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject[] Items;
-    public GameObject Platform;
     public Vector3 spawnValue;
     public float spwanWait;
     public float spawnMaxWait;

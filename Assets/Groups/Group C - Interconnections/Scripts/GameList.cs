@@ -17,11 +17,12 @@ public static class GameList
         new TrafficTrouble(),
         new PlattiGame(),
         new Groups.Group_S.PartKartMiniGame(),
+        new WhatTheHillGame()
     };
 
     public static List<MiniGame> SINGLE_VS_TEAM_LIST = new List<MiniGame>{
-        new WhatTheHillGame(),
         new GameController_G(),
+        new CannonStandoff()
     };
 
     public static List<MiniGame> TEAM_VS_TEAM_LIST = new List<MiniGame>{

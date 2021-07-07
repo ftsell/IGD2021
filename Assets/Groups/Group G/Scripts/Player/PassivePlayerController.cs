@@ -17,6 +17,7 @@ public class PassivePlayerController : MonoBehaviour
     public float SlowDuration = 5f;
     public float SlowMultiplier = 0.1f;
     public Text SlowCooldownText;
+    public Canvas SlowEffect;
 
     public GameObject[] WaveHazards;
     public Vector3 WaveSpawnValues;
@@ -281,8 +282,11 @@ public class PassivePlayerController : MonoBehaviour
 
     IEnumerator WaitUntilExpires(PlayerController controller)
     {
+        SlowEffect.gameObject.SetActive(true);
         yield return new WaitForSeconds(SlowDuration);
         controller.SetSpeedBoostOff();
+        SlowEffect.gameObject.SetActive(false);
+
     }
 
     private void OnMenu()

@@ -329,7 +329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &423090306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _randomPicker: {fileID: 1402479294234901553, guid: 4802adaf245a0f443b03527d09a8fc14,
     type: 3}
+  transitionTime: 1
+  levelLoader: {fileID: 0}
 --- !u!4 &423090307
 Transform:
   m_ObjectHideFlags: 0
@@ -660,6 +662,80 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196433697}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1282150060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6285583511584874707, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_Name
+      value: LevelLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874707, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285583511584874708, guid: cc73cd9a2559947f19f6d863382e67ee,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc73cd9a2559947f19f6d863382e67ee, type: 3}
 --- !u!1 &1387624557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1162,7 @@ MonoBehaviour:
     type: 3}
   myPlayer: {fileID: 958966338}
   secondPlayer: {fileID: 600712466}
+  loadingScreen: {fileID: 0}
 --- !u!4 &1761995560
 Transform:
   m_ObjectHideFlags: 0
@@ -1257,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1941771077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,7 +1347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5d5f23cf1a64811825cb10a87d81f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuPlayerPrefab: {fileID: 0}
   players_colors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

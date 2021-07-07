@@ -24,7 +24,7 @@ public class ChangeFaceTone : MonoBehaviour
     public void PreviousOption()
     {
         currentOption--;
-        if(currentOption <= 0)
+        if(currentOption < 0)
         {
             currentOption = options.Count - 1;
         }

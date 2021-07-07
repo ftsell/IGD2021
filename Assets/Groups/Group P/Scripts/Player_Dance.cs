@@ -14,6 +14,7 @@ namespace GroupP
         public Texture2D specialFace;
 
         int hashstart = Animator.StringToHash("Start");
+        int hashstop = Animator.StringToHash("Stop");
 
         bool stumbling;
 
@@ -21,6 +22,7 @@ namespace GroupP
         {
             animator = minifig.GetComponent<Animator>();
             GameEventSystem.current.onStartDance += StartDance;
+            GameEventSystem.current.onStopDance += StopDance;
 
             faceAnim = minifig.GetComponent<MinifigFaceAnimationController>();
             
@@ -33,6 +35,10 @@ namespace GroupP
         void StartDance()
         {
             animator.SetTrigger(hashstart);
+        }
+        private void StopDance()
+        {
+            animator.SetTrigger(hashstop);
         }
 
         private void OnDestroy()
@@ -88,5 +94,6 @@ namespace GroupP
         {
             faceAnim.PlayAnimation(MinifigFaceAnimationController.FaceAnimation.Cool, 0.5f);
         }
+
     }
 }

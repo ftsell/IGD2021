@@ -6,6 +6,22 @@ public class GoalManager : MonoBehaviour
 
     public Transform leftCylinder;
     public Transform rightCylinder;
+    private Vector3 targetPosition;
+    private bool moveGoal = false;
+
+    void Update() 
+    {
+        if (moveGoal)
+        {
+            goal.transform.position = Vector3.Lerp(goal.transform.position, targetPosition, Time.deltaTime);
+        }
+    }
+
+    public void MoveGoalDownwards()
+    {
+        moveGoal = true;
+        targetPosition = goal.transform.position + new Vector3(0, -2, 0);
+    }
 
     public void MoveGoal(float movement)
     {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5292171885318220091}
   - component: {fileID: 1610919882440168385}
   - component: {fileID: 126052136264723669}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: knive
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6bb907921fff11b9573117f27a8aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: sword
+  type: knive
   isPickedUp: 0
   usesLeft: 5
   isActive: 0
@@ -156,6 +156,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: knive_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3dce21bd69b18b8ff814fd4077aabdc3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 3dce21bd69b18b8ff814fd4077aabdc3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dce21bd69b18b8ff814fd4077aabdc3, type: 3}
 --- !u!4 &3014474916725989707 stripped
@@ -236,6 +246,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: knive_0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1fe6c0b82457328309e5d6694b771833,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 1fe6c0b82457328309e5d6694b771833,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fe6c0b82457328309e5d6694b771833, type: 3}
 --- !u!4 &2941874108836766586 stripped
@@ -315,6 +335,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: knive_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b4da3e07a6c6fb84b8f8296bc730bf75,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: b4da3e07a6c6fb84b8f8296bc730bf75,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4da3e07a6c6fb84b8f8296bc730bf75, type: 3}

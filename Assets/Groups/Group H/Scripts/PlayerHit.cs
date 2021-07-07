@@ -11,6 +11,7 @@ public class PlayerHit : MonoBehaviour
 
     // the audio file for the sound that the figure should make when getting hit
     public AudioClip explodeAudioClip;
+    public AudioClip playerTurnsIntoGhost;
 
     public CapsuleCollider collider;
     public GameObject minifigCharacter;
@@ -38,11 +39,19 @@ public class PlayerHit : MonoBehaviour
 
     void takeDamage()
     {
-        if(!invincible && stillAlive)
+        if (!invincible)
         {
-            invincible = true;
-            StartCoroutine(EnableInvincibility(invincibleTime));
             stillAlive = health.reduceHealth();
+            invincible = true;
+            if (stillAlive)
+            {
+                StartCoroutine(EnableInvincibility(invincibleTime));
+            }
+            else
+            {
+                GetComponent<AudioSource>().PlayOneShot(playerTurnsIntoGhost);
+                StartCoroutine(EnableInvincibility(99));
+            }
         }
     }
 

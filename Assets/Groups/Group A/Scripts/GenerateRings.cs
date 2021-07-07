@@ -16,9 +16,10 @@ public class GenerateRings : MonoBehaviour
     public float yLevel = 0;
     public float randomCapProb = 0.1f;
     public float offsetRotation = 5f, offsetRadius = 1f, offsetAngle = 5f, offsetHeight = 0.1f;
-    public bool rotate = true;
+    public bool rotate = false;
     public float rotationSpeed = 3f;
     public int ringToRotate = 1;
+    public float maxLinkDistance = 5f;
 
     //Arrays für Ringe
     private List<GameObject> Rings = new List<GameObject>();
@@ -36,6 +37,8 @@ public class GenerateRings : MonoBehaviour
             float circumference = (float)(Mathf.PI * 2 * radius * ring);
             int numberOfBlocks = Mathf.CeilToInt( circumference / lengthOfBlock);
             float currentRadius = (float)(radius * ring);
+            List<GameObject> blocksOnCurrentRing = new List<GameObject>();
+            Bounds? lastBounds = null;
             for (int block = 1; block <= numberOfBlocks; block++)
             {
                 if (Random.Range(0, 100) <= randomCapProb * 100) continue;
@@ -45,11 +48,44 @@ public class GenerateRings : MonoBehaviour
 
                 GameObject currentBlock = Instantiate(wallPrefab, position, Quaternion.Euler(0, 360-currentAngle + Random.Range(-offsetAngle, offsetAngle), 0));
                 currentBlock.transform.SetParent(currentRing.transform);
+                blocksOnCurrentRing.Add(currentBlock);
+                
             }
             currentRing.AddComponent<NavMeshSurface>();
             currentRing.layer = 19;
             currentRing.GetComponent<NavMeshSurface>().collectObjects = CollectObjects.Children;
             currentRing.GetComponent<NavMeshSurface>().BuildNavMesh();
+
+            foreach(GameObject block in blocksOnCurrentRing )
+            {
+                Bounds currentBlockBounds = block.GetComponent<BoxCollider>().bounds;
+                currentBlockBounds.Expand(-1.5f);
+                if (lastBounds != null)
+                {
+                    Bounds old = lastBounds ?? new Bounds();
+                    if (!currentBlockBounds.Intersects(old))
+                    {
+                        Vector3 closestPointOld = old.ClosestPoint(block.transform.position);
+                        closestPointOld.y += old.extents.y;
+                        Vector3 closestPointNew = currentBlockBounds.ClosestPoint(closestPointOld);
+                        closestPointNew.y += currentBlockBounds.extents.y;
+                        if (maxLinkDistance >= Vector3.Distance(closestPointOld, closestPointNew))
+                        {
+                            NavMeshHit hit;
+
+                            NavMeshLink newLink = block.AddComponent<NavMeshLink>();
+                            NavMesh.SamplePosition(closestPointNew, out hit, maxLinkDistance, NavMesh.AllAreas);
+                            newLink.startPoint = block.transform.InverseTransformPoint(hit.position);
+                            NavMesh.SamplePosition(closestPointOld, out hit, maxLinkDistance, NavMesh.AllAreas);
+                            newLink.endPoint = block.transform.InverseTransformPoint(hit.position);
+                            newLink.bidirectional = true;
+                            newLink.autoUpdate = true;
+                        }
+                    }
+                }
+                lastBounds = currentBlockBounds;
+
+            }
 
             Rings.Add(currentRing);
         }
@@ -76,7 +112,7 @@ public class GenerateRings : MonoBehaviour
 
        Transform block = ring.transform.GetChild(blockNo);
         Vector3 spawnLocation = block.position;
-        spawnLocation.y += block.lossyScale.y / 2;
+        spawnLocation.y += 4;
         return spawnLocation;
     }
 

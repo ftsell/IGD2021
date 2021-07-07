@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using System.Collections;
+using UnityEngine.AI;
 
 public enum Axle
 {
@@ -25,12 +26,13 @@ public class CarController : MonoBehaviour
     private Rigidbody rb;
     private bool backwards = false;
     private bool handbrake = false;
-    private bool controlEnabled = true;
+    private bool controlEnabled = false;
 
-    public float maxAcceleration = 5.0f;
+    private AudioSource engineSound;
+    public float maxAcceleration = 70.0f;
     public float turnSensitivity = 0.9f;
-    public float maxSteerAngle = 40.0f;
-    public float maxVelocity = 10.0f;
+    public float maxSteerAngle = 30.0f;
+    public float maxVelocity = 55.0f;
     public List<Wheel> wheels;
     public Vector3 centerOfMass;
     public Vector3 wheelRotationOffset;
@@ -48,6 +50,11 @@ public class CarController : MonoBehaviour
         controlEnabled = false;
     }
 
+    public void EnableControl()
+    {
+        controlEnabled = true;
+    }
+
     public void StopCar()
     {
         stopped = true;
@@ -63,6 +70,7 @@ public class CarController : MonoBehaviour
     {
         if(!stopped)
         {
+            PlayEngineSound();
             CheckDrivingDirection(rb);
             ChangeGroundDependentSpeed();
             CheckGroundContact();
@@ -76,6 +84,7 @@ public class CarController : MonoBehaviour
 
     void Start()
     {
+        engineSound = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass;
     }
@@ -106,12 +115,16 @@ public class CarController : MonoBehaviour
         {
             if(fastGrounds.Contains(raycastHit.collider.gameObject))
             {
-                SetWheelsSidewaysStiffnessTo(0.9f);
-                SetWheelsForwardStiffnessTo(3f);
+                SetWheelsSidewaysStiffnessTo(1f);
+                SetWheelsForwardStiffnessTo(2f);
+                maxAcceleration = 70.0f;
+                maxVelocity = 55.0f;
             } else
             {
-                SetWheelsSidewaysStiffnessTo(0.4f);
-                SetWheelsForwardStiffnessTo(0.4f);
+                SetWheelsSidewaysStiffnessTo(0.5f);
+                SetWheelsForwardStiffnessTo(0.2f);
+                maxAcceleration = 10.0f;
+                maxVelocity = 25.0f;
             }
         }
     }
@@ -173,6 +186,7 @@ public class CarController : MonoBehaviour
     {
         foreach (Wheel wheel in wheels)
         {
+            //Debug.Log("Speed: " + (rb.velocity.magnitude * 3.6f) + " km/h");
             if (controlEnabled)
             {
                 // driving forwards --> accelerate
@@ -189,6 +203,10 @@ public class CarController : MonoBehaviour
                     wheel.collider.motorTorque = 0;
                     ApplyBrakeTorque(wheel, -(movement.y * 0.001f));
                     //Debug.Log("forward-brake");
+                    if(rb.velocity.magnitude <= 0.1)
+                    {
+                        wheel.collider.brakeTorque = Mathf.Infinity;
+                    }
                 }
                 // driving backwards --> brake
                 else if (movement.y > 0 && backwards && GroundPercent > 0.0f)
@@ -210,6 +228,10 @@ public class CarController : MonoBehaviour
                     //Debug.Log("no input!");
                     wheel.collider.motorTorque = 1;
                     wheel.collider.brakeTorque = CoastingDrag * 100;
+                    if (rb.velocity.magnitude <= 0.1)
+                    {
+                        wheel.collider.brakeTorque = Mathf.Infinity;
+                    }
                 }
                 else
                 {
@@ -339,6 +361,30 @@ private void OnMove(InputValue value)
         {
             StartCoroutine(ps.power.UsePowerup(ps.gameObject));
         }
+    }
+
+    private void PlayEngineSound()
+    {
+        if (TryGetComponent(out NavMeshAgent agent))
+        {
+            float newPitch = agent.velocity.magnitude / agent.speed * +1;
+            if (newPitch >= 2.5f)
+            {
+                newPitch = 2.5f;
+            }
+            engineSound.pitch = newPitch;
+        }
+        else
+        {
+            float newPitch = engineSound.pitch = rb.velocity.magnitude / maxVelocity + 1;
+            if (newPitch >= 2.5f)
+            {
+                newPitch = 2.5f;
+            }
+            engineSound.pitch = newPitch;
+        }
+
+
     }
 
     private void OnEastRelease()

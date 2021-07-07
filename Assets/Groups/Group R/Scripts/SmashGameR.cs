@@ -28,6 +28,8 @@ public class SmashGameR : MiniGame
     public AIAgentR AI4;
 
     public Countdown countdown;
+    public AudioSource audioSource;
+    public AudioClip endJingle;
     public int gameDuration;
 
     private float endTime;
@@ -36,6 +38,8 @@ public class SmashGameR : MiniGame
     private bool startCountdownCalled = false;
     private bool startedGame = false;
     private bool endCountdownCalled = false;
+    private bool playedEndJingle = false;
+    private bool finishedGame = false;
 
     public override string getDisplayName()
     {
@@ -53,6 +57,9 @@ public class SmashGameR : MiniGame
 
     private void Start()
     {
+        endTime = Time.time + gameDuration + 3;
+        countdown.StartCountDown(1);
+
         players = new OurMinifigController[] {player1, player2, player3, player4};
         
         //Create list of player inputs from the players in the scene
@@ -62,18 +69,19 @@ public class SmashGameR : MiniGame
         //This assigns the player input in the order they were given in the array
         InputManager.Instance.AssignPlayerInput(playerInputs);
 
-        AI1.gameObject.SetActive(PlayerPrefs.GetString("Player1_AI").Equals("True"));
+        AI1.gameObject.SetActive(PlayerPrefs.GetString("PLAYER1_AI").Equals("True"));
         AI1.SetId(1);
-        AI2.gameObject.SetActive(PlayerPrefs.GetString("Player2_AI").Equals("True"));
+        AI2.gameObject.SetActive(PlayerPrefs.GetString("PLAYER2_AI").Equals("True"));
         AI2.SetId(2);
-        AI3.gameObject.SetActive(PlayerPrefs.GetString("Player3_AI").Equals("True"));
+        AI3.gameObject.SetActive(PlayerPrefs.GetString("PLAYER3_AI").Equals("True"));
         AI3.SetId(3);
-        AI4.gameObject.SetActive(PlayerPrefs.GetString("Player4_AI").Equals("True"));
+        AI4.gameObject.SetActive(PlayerPrefs.GetString("PLAYER4_AI").Equals("True"));
         AI4.SetId(4);
 
-        endTime = Time.time + gameDuration + 3;
-        countdown.StartCountDown(1);
-
+        InputManager.Instance.ApplyPlayerCustomization(player1.gameObject, 1);
+        InputManager.Instance.ApplyPlayerCustomization(player2.gameObject, 2);
+        InputManager.Instance.ApplyPlayerCustomization(player3.gameObject, 3);
+        InputManager.Instance.ApplyPlayerCustomization(player4.gameObject, 4);
     }
 
     void Update()
@@ -90,6 +98,7 @@ public class SmashGameR : MiniGame
             startedGame = true;
             foreach (OurMinifigController p in players)
                 p.SetInputEnabled(true);
+            audioSource.Play();
         }
         if (timeLeft < 0)
         {
@@ -120,11 +129,16 @@ public class SmashGameR : MiniGame
             endTime = Time.time; //-> timeLeft = 0
             place -= 1;
             countdown.StartCountDown(0);
-            
         }
 
         if (timeLeft < -1)
         {
+            if (!playedEndJingle)
+            {
+                playedEndJingle = true;
+                audioSource.Stop();
+                audioSource.PlayOneShot(endJingle);
+            }
             foreach (OurMinifigController p in players)
             {
                 switch (p.place)
@@ -173,8 +187,9 @@ public class SmashGameR : MiniGame
         }
 
 
-        if (timeLeft < -6)
+        if (timeLeft < -6 && !finishedGame)
         {
+            finishedGame = true;
             //Create array of positions with player ids, this also works in case there are multiple players in one position
             int[] first = {};
             int[] second = {};

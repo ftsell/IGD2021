@@ -19,7 +19,7 @@ public class PowerupAttack : PowerUp {
         PlayerStats ps = player.GetComponent<PlayerStats>();
     
         // apply powerup actions
-        Missile missile = missileManager.CreateMissile(player.transform, ps.hasWhiteBrick);
+        Missile missile = missileManager.CreateMissile(player.transform, ps.hasWhiteBrick, player);
 
         if (ps.hasWhiteBrick)
         {

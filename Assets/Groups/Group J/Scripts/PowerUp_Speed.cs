@@ -1,52 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUp_Speed : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private float secondsToUse = 10;
+    private float initalPlayerSpeed;
+    private float initalPlayerAcceleration;
+
+    public void RemovePowerUp(MinifigControllerJ controller)
     {
-        other.enabled = false;
-        Debug.Log("Coll");
-        if (other.tag == ("Player"))
-        {
-            other.enabled = true;
-            Debug.Log("PickUp");
-            PickUp(other);
-           
-        }
-        else
-        {
-            other.enabled = false;
-        }
+        controller.maxForwardSpeed = initalPlayerSpeed;
+        controller.acceleration = initalPlayerAcceleration;
+        controller.gameObject.GetComponent<JPlayerStats>().powerUpSpeed_IsActive = false;
+        Debug.Log("Removed");
     }
 
-    void PickUp(Collider player)
+    public IEnumerator ApplyPowerUp(MinifigControllerJ controller)
     {
-        MinifigControllerJ controller = player.GetComponent<MinifigControllerJ>();
-        controller.maxForwardSpeed *= 2;
-        controller.acceleration *= 2;
-        Destroy(this.gameObject);
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == ("Obstacle"))
+        if (!controller.gameObject.GetComponent<JPlayerStats>().powerUpSpeed_IsActive)
         {
-            Physics.IgnoreLayerCollision(gameObject.layer, 21, true);
+            initalPlayerAcceleration = controller.acceleration;
+            initalPlayerSpeed = controller.maxForwardSpeed;
+            controller.maxForwardSpeed *= 2;
+            controller.acceleration *= 2;
+            controller.gameObject.GetComponent<JPlayerStats>().powerUpSpeed_IsActive = true;
+            yield return new WaitForSeconds(secondsToUse);
+            RemovePowerUp(controller);
         }
-
-     
-    }
-
-    IEnumerator ActivateInvincibility()
-    {
-        Physics.IgnoreLayerCollision(gameObject.layer, 21, true);
-
-
-        yield return new WaitForSeconds(3);
-
-        Physics.IgnoreLayerCollision(gameObject.layer, 21, false);
     }
 }

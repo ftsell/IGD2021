@@ -30,7 +30,7 @@ public class ItemGenerator : MonoBehaviour
         //Todo check if previously instantiated items are destroyed and may be reinstantiated
         int randomChoice = Random.Range(0,notInstantiated.Count);
         GameObject newItem = Instantiate(notInstantiated[randomChoice]) as GameObject;
-        notInstantiated.Remove(notInstantiated[randomChoice]);
+        // notInstantiated.Remove(notInstantiated[randomChoice]);
         newItem.transform.position = new Vector3(0.0f,spawnHeight,Random.Range(minSpawnZ,maxSpawnZ));
     }
 
